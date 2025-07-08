@@ -1,3 +1,4 @@
+import 'package:absensiq/constant/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -105,7 +106,79 @@ class _AbsenPageState extends State<AbsenPage> {
             ),
           ),
           SizedBox(height: 20),
-          Text('Status'),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 33),
+                child: Text('Status: '),
+              ),
+              SizedBox(width: 12),
+              Text('data', style: TextStyle(fontWeight: FontWeight.bold)),
+            ],
+          ),
+          SizedBox(height: 10),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 33),
+                child: Text('Alamat:'),
+              ),
+              SizedBox(width: 12),
+              Flexible(child: Text('data')),
+            ],
+          ),
+          SizedBox(height: 36),
+          Padding(
+            padding: const EdgeInsets.only(left: 33, right: 33, bottom: 15),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: AppColor.border),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Monday'),
+                        SizedBox(height: 4),
+                        Text('13-Jun-25'),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: [
+                            Text('Check In'),
+                            SizedBox(height: 4),
+                            Text('Jam'),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text('Check Out'),
+                            SizedBox(height: 4),
+                            Text('Jam'),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Divider(),
+          ElevatedButton(onPressed: () {}, child: Text('Ambil Foto')),
+          ElevatedButton(onPressed: () {}, child: Text('Check In')),
         ],
       ),
     );
