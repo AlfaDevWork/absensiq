@@ -1,4 +1,8 @@
-import 'package:absensiq/pages/login_page.dart';
+import 'package:absensiq/pages/absen_page.dart';
+import 'package:absensiq/pages/home_page.dart';
+import 'package:absensiq/pages/navigation.dart';
+import 'package:absensiq/pages/profile_page.dart';
+import 'package:absensiq/pages/riwayat_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,6 +16,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => NavigationPage(),
+        HomePage.id: (contect) => HomePage(),
+        ProfilePage.id: (contect) => ProfilePage(),
+        RiwayatPage.id: (contect) => RiwayatPage(),
+        AbsenPage.id: (context) => AbsenPage(),
+      },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -32,7 +44,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
       ),
-      home: LoginPage(),
+      // home: NavigationPage(),
     );
   }
 }
