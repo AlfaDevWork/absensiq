@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.8
+  dropdown_search: ^6.0.2
   flutter:
     sdk: flutter
   geocoding: ^4.0.0

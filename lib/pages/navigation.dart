@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});
+  static const String id = "/navigation";
 
   @override
   State<NavigationPage> createState() => _NavigationPageState();

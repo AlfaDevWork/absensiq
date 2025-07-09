@@ -1,7 +1,10 @@
 import 'package:absensiq/pages/absen_page.dart';
 import 'package:absensiq/pages/home_page.dart';
+import 'package:absensiq/pages/login_page.dart';
 import 'package:absensiq/pages/navigation.dart';
+import 'package:absensiq/pages/password_page.dart';
 import 'package:absensiq/pages/profile_page.dart';
+import 'package:absensiq/pages/register_page.dart';
 import 'package:absensiq/pages/riwayat_page.dart';
 import 'package:flutter/material.dart';
 
@@ -18,11 +21,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => NavigationPage(),
+        '/': (context) => LoginPage(),
+        NavigationPage.id: (context) => NavigationPage(),
         HomePage.id: (contect) => HomePage(),
         ProfilePage.id: (contect) => ProfilePage(),
         RiwayatPage.id: (contect) => RiwayatPage(),
         AbsenPage.id: (context) => AbsenPage(),
+        LoginPage.id: (context) => LoginPage(),
+        RegisterPage.id: (context) => RegisterPage(),
+        PasswordPage.id: (context) => PasswordPage()
       },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
@@ -44,7 +51,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
       ),
-      // home: NavigationPage(),
+      // home: LoginPage(),
     );
   }
 }
