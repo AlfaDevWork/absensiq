@@ -31,6 +31,8 @@ class AuthService {
   }
 
   Future<List<Batch>> getBatches() async {
+    final token = await getToken();
+    if (token == null) throw 'Token tidak ditemukan. Silakan login kembali.';
     final url = Uri.parse(ApiEndpoints.batches);
     try {
       final response = await http.get(

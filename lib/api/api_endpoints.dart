@@ -1,5 +1,5 @@
 class ApiEndpoints {
-  static final String baseUrl = "https://appabsensi.mobileprojp.com/";
+  static final String baseUrl = "https://appabsensi.mobileprojp.com/api";
 
   // Endpoint untuk Otentikasi
   static final String register = '$baseUrl/register';

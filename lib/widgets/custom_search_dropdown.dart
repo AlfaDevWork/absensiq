@@ -24,7 +24,7 @@ class CustomDropdownSearch<T> extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey.shade400),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.all(Radius.elliptical(4, 4)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
