@@ -20,7 +20,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
             padding: const EdgeInsets.only(top: 10),
             child: Center(child: CircleAvatar(radius: 50)),
           ),
-          CustomTextFormField(label: 'Nama', hintText: 'Alfarezhi'),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 32),
+            child: Column(
+              children: [
+                CustomTextFormField(label: 'Nama', hintText: 'Alfarezhi'),
+                SizedBox(height: 10),
+                CustomTextFormField(label: 'Email', hintText: 'Email'),
+              ],
+            ),
+          ),
         ],
       ),
     );

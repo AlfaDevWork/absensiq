@@ -66,6 +66,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Column(
@@ -149,7 +150,8 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         print("Username: ${_emailController.text}");
                         print("Password: ${_passwordController.text}");
-                        _handleLogin();
+                        // _handleLogin();
+                        Navigator.pushNamed(context, NavigationPage.id);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xff113289),

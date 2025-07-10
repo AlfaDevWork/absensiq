@@ -1,11 +1,9 @@
-import 'dart:io';
-
 import 'package:absensiq/models/batch.dart';
 import 'package:absensiq/models/training.dart';
 import 'package:absensiq/services/auth_service.dart';
+import 'package:absensiq/widgets/custom_search_dropdown.dart';
 import 'package:absensiq/widgets/textformfield.dart'; // Pastikan path ini benar
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -31,8 +29,39 @@ class _RegisterPageState extends State<RegisterPage> {
   // File? _profileImage;
 
   bool _viewPassword = false;
+  final bool _isLoading = false;
+  bool _isDataLoading = false;
   final AuthService _authService = AuthService();
   // final ImagePicker _picker = ImagePicker();
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchDropdownData();
+  }
+
+  Future<void> _fetchDropdownData() async {
+    try {
+      final batches = await _authService.getBatches();
+      final trainings = await _authService.getTrainings();
+      if (mounted) {
+        setState(() {
+          _batches = batches;
+          _trainings = trainings;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Gagal memuat data: ${e.toString()}')),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isDataLoading = false);
+      }
+    }
+  }
 
   @override
   void dispose() {
@@ -121,7 +150,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 const SizedBox(height: 16),
-
+                CustomDropdownSearch<Training>(
+                  items: _trainings,
+                  itemLabel: (Training) => Training.title,
+                  onChanged: (Training? data) =>
+                      setState(() => _selectedTraining = data),
+                ),
                 const Text(
                   "Jenis Kelamin",
                   style: TextStyle(color: Colors.black, fontSize: 16),
@@ -149,7 +183,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   ],
                 ),
                 const SizedBox(height: 24),
-
                 SizedBox(
                   height: 50,
                   child: ElevatedButton(
