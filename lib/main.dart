@@ -1,10 +1,12 @@
 import 'package:absensiq/pages/absen_page.dart';
+import 'package:absensiq/pages/auths/forgot_password.dart';
+import 'package:absensiq/pages/auths/login_page.dart';
+import 'package:absensiq/pages/auths/register_page.dart';
+import 'package:absensiq/pages/auths/reset_password.dart';
+import 'package:absensiq/pages/edit_profile.dart';
 import 'package:absensiq/pages/home_page.dart';
-import 'package:absensiq/pages/login_page.dart';
 import 'package:absensiq/pages/navigation.dart';
-import 'package:absensiq/pages/password_page.dart';
 import 'package:absensiq/pages/profile_page.dart';
-import 'package:absensiq/pages/register_page.dart';
 import 'package:absensiq/pages/riwayat_page.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +31,9 @@ class MyApp extends StatelessWidget {
         AbsenPage.id: (context) => AbsenPage(),
         LoginPage.id: (context) => LoginPage(),
         RegisterPage.id: (context) => RegisterPage(),
-        PasswordPage.id: (context) => PasswordPage()
+        ForgotPasswordPage.id: (context) => ForgotPasswordPage(),
+        ResetPasswordPage.id: (context) => ResetPasswordPage(),
+        EditProfilePage.id: (context) => EditProfilePage(),
       },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

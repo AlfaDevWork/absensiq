@@ -1,3 +1,5 @@
+import 'package:absensiq/pages/edit_profile.dart';
+import 'package:absensiq/pages/auths/login_page.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -35,7 +37,9 @@ class _ProfilePageState extends State<ProfilePage> {
             leading: Icon(Icons.person_outline),
             title: Text('Ubah Profil'),
             trailing: Icon(Icons.arrow_forward_ios, size: 15),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, EditProfilePage.id);
+            },
           ),
           Divider(),
           ListTile(
@@ -49,7 +53,13 @@ class _ProfilePageState extends State<ProfilePage> {
             leading: Icon(Icons.exit_to_app),
             title: Text('Keluar'),
             trailing: Icon(Icons.arrow_forward_ios, size: 15),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                LoginPage.id,
+                (route) => false,
+              );
+            },
           ),
           Divider(),
         ],

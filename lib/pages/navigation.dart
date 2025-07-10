@@ -23,7 +23,8 @@ class _NavigationPageState extends State<NavigationPage> {
           Navigator.pushNamed(context, AbsenPage.id);
         },
         backgroundColor: Color(0xff84BFFF),
-        child: Icon(Icons.access_time, color: Colors.white, size: 30),
+        shape: CircleBorder(),
+        child: Icon(Icons.fingerprint, color: Colors.white, size: 30),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Container(
