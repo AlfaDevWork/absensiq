@@ -22,8 +22,14 @@ class _LoginPageState extends State<LoginPage> {
   final AuthService _authService = AuthService();
 
   Future<void> _handleLogin() async {
-    if (!_formkey.currentState!.validate()) return;
+    print('_handleLogin callback');
 
+    if (!(_formkey.currentState?.validate() ?? false)) {
+      print('validasi form gagal');
+      return;
+    }
+
+    print('Mulai proses login');
     setState(() => _isLoading = true);
 
     try {
@@ -32,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
         password: _passwordController.text,
       );
 
+      print('respon: $response');
       if (mounted) {
         final message = response['message'] ?? 'Login Berhasil';
         ScaffoldMessenger.of(
@@ -43,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
         );
       }
     } catch (e) {
+      print('error login: ${e.toString()}');
       if (mounted) {
         ScaffoldMessenger.of(
           context,
@@ -69,142 +77,148 @@ class _LoginPageState extends State<LoginPage> {
       resizeToAvoidBottomInset: false,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              height: 280,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                    Colors.black45,
-                    BlendMode.darken,
-                  ),
-                  image: AssetImage('assets/images/ppkd.jpg'),
-                ),
-              ),
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Hallo!',
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+        child: Form(
+          key: _formkey,
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                height: 280,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      Colors.black45,
+                      BlendMode.darken,
                     ),
+                    image: AssetImage('assets/images/ppkd.jpg'),
                   ),
-                  SizedBox(height: 15),
-                  Text(
-                    'Please login to get full access from us',
-                    style: TextStyle(fontSize: 14, color: Color(0xB3ffffff)),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 32),
-              child: Column(
-                children: [
-                  CustomTextFormField(
-                    label: 'Email',
-                    hintText: 'Masukkan email Anda',
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (v) {
-                      if (v == null || v.isEmpty)
-                        return 'Email tidak boleh kosong';
-                      if (!RegExp(r'\S+@\S+\.\S+').hasMatch(v))
-                        return 'Format email tidak valid';
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: 10),
-                  CustomTextFormField(
-                    label: 'Password',
-                    hintText: '•••••••••••••',
-                    controller: _passwordController,
-                    obscureText: !_viewPassword,
-                    validator: (v) =>
-                        v!.isEmpty ? ' Password tidak boleh kosong' : null,
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _viewPassword = !_viewPassword;
-                        });
-                      },
-                      icon: Icon(
-                        _viewPassword
-                            ? Icons.visibility_off_outlined
-                            : Icons.visibility_outlined,
-                        color: Colors.black54,
+                ),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Hallo!',
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: _isLoading
-                        ? Center(child: CircularProgressIndicator())
-                        : ElevatedButton(
-                            onPressed: () {
-                              _handleLogin();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff113289),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.elliptical(4, 4),
+                    SizedBox(height: 15),
+                    Text(
+                      'Please login to get full access from us',
+                      style: TextStyle(fontSize: 14, color: Color(0xB3ffffff)),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 30,
+                  vertical: 32,
+                ),
+                child: Column(
+                  children: [
+                    CustomTextFormField(
+                      label: 'Email',
+                      hintText: 'Masukkan email Anda',
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (v) {
+                        if (v == null || v.isEmpty)
+                          return 'Email tidak boleh kosong';
+                        if (!RegExp(r'\S+@\S+\.\S+').hasMatch(v))
+                          return 'Format email tidak valid';
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    CustomTextFormField(
+                      label: 'Password',
+                      hintText: '•••••••••••••',
+                      controller: _passwordController,
+                      obscureText: !_viewPassword,
+                      validator: (v) =>
+                          v!.isEmpty ? ' Password tidak boleh kosong' : null,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _viewPassword = !_viewPassword;
+                          });
+                        },
+                        icon: Icon(
+                          _viewPassword
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: _isLoading
+                          ? Center(child: CircularProgressIndicator())
+                          : ElevatedButton(
+                              onPressed: () {
+                                _handleLogin();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff113289),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.elliptical(4, 4),
+                                  ),
+                                ),
+                              ),
+                              child: const Text(
+                                'Login',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
                                 ),
                               ),
                             ),
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                              ),
-                            ),
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Lupa Kata Sandi?'),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, ResetPasswordPage.id);
+                          },
+                          child: const Text(
+                            'Reset Password',
+                            style: TextStyle(color: Color(0xff113289)),
                           ),
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Lupa Kata Sandi?'),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, ResetPasswordPage.id);
-                        },
-                        child: const Text(
-                          'Reset Password',
-                          style: TextStyle(color: Color(0xff113289)),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Belum Punya Akun?'),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, RegisterPage.id);
+                    },
+                    child: const Text(
+                      'Daftar Sekarang',
+                      style: TextStyle(color: Color(0xff113289)),
+                    ),
                   ),
                 ],
               ),
-            ),
-            Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Belum Punya Akun?'),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, RegisterPage.id);
-                  },
-                  child: const Text(
-                    'Daftar Sekarang',
-                    style: TextStyle(color: Color(0xff113289)),
-                  ),
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

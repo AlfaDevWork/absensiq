@@ -9,8 +9,11 @@ import 'package:absensiq/pages/navigation.dart';
 import 'package:absensiq/pages/profile_page.dart';
 import 'package:absensiq/pages/riwayat_page.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('id_ID', null);
   runApp(const MyApp());
 }
 

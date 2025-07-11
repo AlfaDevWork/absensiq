@@ -14,35 +14,25 @@ class AttendanceRecord {
   });
 
   factory AttendanceRecord.fromJson(Map<String, dynamic> json) {
-    DateTime? parseUtcDate(String? dateStr) {
-      if (dateStr == null) return null;
+    DateTime? attendanceDate;
+    if (json['attendance_date'] != null) {
       try {
-        return DateTime.parse("${dateStr.replaceFirst(' ', 'T')}Z");
+        // Membuat objek DateTime dari tanggal yang diberikan
+        attendanceDate = DateTime.parse(json['attendance_date']);
       } catch (e) {
-        try {
-          return DateTime.parse(dateStr);
-        } catch (e) {
-          return null;
-        }
+        // Biarkan null jika format tanggal tidak valid
       }
     }
 
-    final checkInDate = parseUtcDate(json['check_in']);
-    final checkOutDate = parseUtcDate(json['check_out']);
-
     return AttendanceRecord(
-      day: checkInDate != null
-          ? DateFormat('EEEE', 'id_ID').format(checkInDate.toLocal())
+      day: attendanceDate != null
+          ? DateFormat('EEEE', 'id_ID').format(attendanceDate)
           : 'Unknown',
-      date: checkInDate != null
-          ? DateFormat('dd MMM yy', 'id_ID').format(checkInDate.toLocal())
+      date: attendanceDate != null
+          ? DateFormat('dd MMM yy', 'id_ID').format(attendanceDate)
           : 'N/A',
-      checkInTime: checkInDate != null
-          ? DateFormat('HH:mm:ss').format(checkInDate.toLocal())
-          : '-',
-      checkOutTime: checkOutDate != null
-          ? DateFormat('HH:mm:ss').format(checkOutDate.toLocal())
-          : '-',
+      checkInTime: json['check_in_time'] ?? '-',
+      checkOutTime: json['check_out_time'] ?? '-',
     );
   }
 }
