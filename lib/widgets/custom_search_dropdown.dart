@@ -23,17 +23,21 @@ class CustomDropdownSearch<T> extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey.shade400),
+          border: Border.all(color: Colors.black),
           borderRadius: BorderRadius.all(Radius.elliptical(4, 4)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              selectedItem != null ? itemLabel(selectedItem as T) : hintText,
-              style: TextStyle(
-                color: selectedItem != null ? Colors.black : Colors.grey,
-                fontSize: 16,
+            Expanded(
+              child: Text(
+                overflow: TextOverflow.ellipsis,
+                // maxLines: 1,
+                selectedItem != null ? itemLabel(selectedItem as T) : hintText,
+                style: TextStyle(
+                  color: selectedItem != null ? Colors.black : Colors.grey,
+                  fontSize: 16,
+                ),
               ),
             ),
             const Icon(Icons.arrow_drop_down),
@@ -125,7 +129,11 @@ class _DropdownSearchDialogState<T> extends State<_DropdownSearchDialog<T>> {
               itemBuilder: (context, index) {
                 final item = filteredItems[index];
                 return ListTile(
-                  title: Text(widget.itemLabel(item)),
+                  title: Text(
+                    widget.itemLabel(item),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                   onTap: () => widget.onItemSelected(item),
                 );
               },

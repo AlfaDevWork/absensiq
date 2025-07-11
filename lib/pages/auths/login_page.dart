@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   final AuthService _authService = AuthService();
 
   Future<void> _handleLogin() async {
-    if (!_formkey.currentState!.validate()) return;
+    if (!(_formkey.currentState?.validate() ?? false)) return;
 
     setState(() => _isLoading = true);
 
@@ -146,26 +146,28 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     width: double.infinity,
                     height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        print("Username: ${_emailController.text}");
-                        print("Password: ${_passwordController.text}");
-                        // _handleLogin();
-                        Navigator.pushNamed(context, NavigationPage.id);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff113289),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.elliptical(4, 4),
+                    child: _isLoading
+                        ? Center(child: CircularProgressIndicator())
+                        : ElevatedButton(
+                            onPressed: () {
+                              _handleLogin();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xff113289),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.elliptical(4, 4),
+                                ),
+                              ),
+                            ),
+                            child: const Text(
+                              'Login',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ),
                   ),
                   const SizedBox(height: 20),
                   Row(
