@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   final AuthService _authService = AuthService();
 
   Future<void> _handleLogin() async {
-    if (!(_formkey.currentState?.validate() ?? false)) return;
+    if (!_formkey.currentState!.validate()) return;
 
     setState(() => _isLoading = true);
 
