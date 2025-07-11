@@ -5,7 +5,6 @@ import 'package:absensiq/api/api_endpoints.dart';
 import 'package:absensiq/models/batch.dart';
 import 'package:absensiq/models/training.dart';
 import 'package:absensiq/models/user.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,8 +30,6 @@ class AuthService {
   }
 
   Future<List<Batch>> getBatches() async {
-    final token = await getToken();
-    if (token == null) throw 'Token tidak ditemukan. Silakan login kembali.';
     final url = Uri.parse(ApiEndpoints.batches);
     try {
       final response = await http.get(

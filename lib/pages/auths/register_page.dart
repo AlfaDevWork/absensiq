@@ -152,10 +152,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 16),
                 CustomDropdownSearch<Training>(
                   items: _trainings,
-                  itemLabel: (Training) => Training.title,
+                  itemLabel: (training) => training.title,
                   onChanged: (Training? data) =>
                       setState(() => _selectedTraining = data),
                 ),
+                SizedBox(height: 10),
                 const Text(
                   "Jenis Kelamin",
                   style: TextStyle(color: Colors.black, fontSize: 16),
