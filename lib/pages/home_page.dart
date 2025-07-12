@@ -163,9 +163,9 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     SizedBox(height: 18),
-                    Center(
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 26),
                       child: Container(
-                        width: 350,
                         height: 160,
                         decoration: BoxDecoration(
                           color: AppColor.main,
@@ -201,65 +201,70 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                             SizedBox(height: 16),
-                            Container(
-                              width: 300,
-                              height: 67,
-                              decoration: BoxDecoration(
-                                color: Color(0x21113289),
-                                borderRadius: BorderRadius.circular(10),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 30,
                               ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Check In',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
+                              child: Container(
+                                width: 300,
+                                height: 67,
+                                decoration: BoxDecoration(
+                                  color: Color(0x21113289),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Check In',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
                                           ),
-                                        ),
-                                        Text(
-                                          _checkInTime,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
+                                          Text(
+                                            _checkInTime,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  VerticalDivider(
-                                    indent: 6,
-                                    endIndent: 6,
-                                    color: Colors.white,
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Check Out',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        Text(
-                                          _checkOutTime,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ],
+                                    VerticalDivider(
+                                      indent: 6,
+                                      endIndent: 6,
+                                      color: Colors.white,
                                     ),
-                                  ),
-                                ],
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Check Out',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          Text(
+                                            _checkOutTime,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -270,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 26),
                       child: Container(
-                        width: 350,
+                        // width: 350,
                         height: 70,
                         decoration: BoxDecoration(
                           color: Color(0x3084BFFF),
@@ -281,6 +286,7 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                             children: [
                               Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text('Distance from place'),
                                   Text(
@@ -331,14 +337,17 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 85),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, RiwayatPage.id);
-                          },
-                          child: Text(
-                            'Lihat Semua',
-                            style: TextStyle(color: Color(0xff113289)),
+                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20),
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, RiwayatPage.id);
+                            },
+                            child: Text(
+                              'Lihat Semua',
+                              style: TextStyle(color: Color(0xff113289)),
+                            ),
                           ),
                         ),
                       ],

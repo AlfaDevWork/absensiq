@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
+  final bool readOnly;
 
   const CustomTextFormField({
     super.key,
@@ -20,6 +21,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.validator,
     this.keyboardType,
+    this.readOnly = false,
   });
 
   @override
@@ -34,6 +36,7 @@ class CustomTextFormField extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormField(
+            readOnly: readOnly,
             autovalidateMode: AutovalidateMode.onUnfocus,
             controller: controller,
             obscureText: obscureText,
