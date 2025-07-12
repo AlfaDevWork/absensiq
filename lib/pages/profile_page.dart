@@ -111,6 +111,32 @@ class _ProfilePageState extends State<ProfilePage> {
                     trailing: Icon(Icons.arrow_forward_ios, size: 15),
                     onTap: () async {
                       await _authService.logout();
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            'Logout',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          content: Text('Are you sure you want to logout?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    LoginPage.id,
+                                    (route) => false,
+                                  ),
+                              child: Text('Logout'),
+                            ),
+                          ],
+                        ),
+                      );
+
                       Navigator.pushNamedAndRemoveUntil(
                         context,
                         LoginPage.id,
