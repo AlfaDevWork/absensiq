@@ -163,8 +163,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     SizedBox(height: 18),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 26),
+                    Center(
                       child: Container(
                         width: 350,
                         height: 160,
@@ -293,7 +292,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(width: 55),
+                              Spacer(),
                               TextButton(
                                 onPressed: () {},
                                 child: Container(
