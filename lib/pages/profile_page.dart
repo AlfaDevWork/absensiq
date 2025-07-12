@@ -109,8 +109,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     leading: Icon(Icons.exit_to_app),
                     title: Text('Keluar'),
                     trailing: Icon(Icons.arrow_forward_ios, size: 15),
-                    onTap: () async {
-                      await _authService.logout();
+                    onTap: () {
+                      // await _authService.logout();
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
@@ -125,22 +125,18 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: Text('Cancel'),
                             ),
                             TextButton(
-                              onPressed: () =>
-                                  Navigator.pushNamedAndRemoveUntil(
-                                    context,
-                                    LoginPage.id,
-                                    (route) => false,
-                                  ),
+                              onPressed: () async {
+                                await _authService.logout();
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  LoginPage.id,
+                                  (route) => false,
+                                );
+                              },
                               child: Text('Logout'),
                             ),
                           ],
                         ),
-                      );
-
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        LoginPage.id,
-                        (route) => false,
                       );
                     },
                   ),
