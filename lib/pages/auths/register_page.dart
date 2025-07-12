@@ -86,16 +86,19 @@ class _RegisterPageState extends State<RegisterPage> {
 
       if (mounted) {
         final message = response['message'] ?? 'Registrasi berhasil!';
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(message)));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(behavior: SnackBarBehavior.floating, content: Text(message)),
+        );
         Navigator.of(context).pop();
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(e.toString())));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
+            content: Text(e.toString()),
+          ),
+        );
       }
     } finally {
       if (mounted) {

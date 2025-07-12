@@ -188,24 +188,7 @@ class _AbsenPageState extends State<AbsenPage> {
             SizedBox(height: 20),
             Divider(),
             SizedBox(height: 30),
-            Center(
-              child: SizedBox(
-                height: 45,
-                width: 340,
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xff84BFFF),
-                  ),
-                  icon: Icon(Icons.camera_alt_outlined, color: Colors.white),
-                  label: Text(
-                    'Ambil Foto',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 15),
+
             Center(
               child: SizedBox(
                 height: 45,

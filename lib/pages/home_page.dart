@@ -192,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                                       top: 17,
                                     ),
                                     child: Text(
-                                      'Jl. Pangeran Diponegoro No 5, Kec. Medan Petisah, Kota Medan, Sumatra Utara',
+                                      'Jl. Karet Pasar Baru Barat, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat',
                                       style: TextStyle(color: Colors.white),
                                       softWrap: true,
                                     ),

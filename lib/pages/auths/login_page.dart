@@ -41,9 +41,9 @@ class _LoginPageState extends State<LoginPage> {
       print('respon: $response');
       if (mounted) {
         final message = response['message'] ?? 'Login Berhasil';
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(message)));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(behavior: SnackBarBehavior.floating, content: Text(message)),
+        );
         Navigator.of(context).pushNamedAndRemoveUntil(
           NavigationPage.id,
           (Route<dynamic> route) => false,
@@ -52,9 +52,12 @@ class _LoginPageState extends State<LoginPage> {
     } catch (e) {
       print('error login: ${e.toString()}');
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(e.toString())));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
+            content: Text(e.toString()),
+          ),
+        );
       }
     } finally {
       if (mounted) {
