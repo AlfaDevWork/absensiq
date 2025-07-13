@@ -56,6 +56,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        surfaceTintColor: Colors.white,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);

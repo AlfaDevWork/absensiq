@@ -99,8 +99,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: Text('Ubah Profil'), centerTitle: true),
+      appBar: AppBar(title: Text('Ubah Profil'), centerTitle: true, surfaceTintColor: Colors.white),
       body: Form(
         key: _formKey,
         child: Column(

@@ -1,6 +1,6 @@
 import 'package:absensiq/models/user.dart';
 import 'package:absensiq/pages/auths/login_page.dart';
-import 'package:absensiq/pages/change_password_request_screen.dart';
+import 'package:absensiq/pages/auths/change_password_request_screen.dart';
 import 'package:absensiq/pages/edit_profile.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -72,15 +72,18 @@ class _ProfilePageState extends State<ProfilePage> {
                       leading: Icon(Icons.person_outline),
                       title: Text('Ubah Profil'),
                       trailing: Icon(Icons.arrow_forward_ios, size: 15),
-                      onTap: () {
+                      onTap: () async {
                         if (_user != null) {
-                          Navigator.push(
+                          final result = await Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
                                   EditProfilePage(currentUser: _user!),
                             ),
                           );
+                          if (result == true) {
+                            _fetchUserProfile();
+                          }
                         }
                       },
                     ),

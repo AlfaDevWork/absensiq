@@ -66,6 +66,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        surfaceTintColor: Colors.white,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);

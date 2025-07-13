@@ -117,6 +117,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        surfaceTintColor: Colors.white,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
