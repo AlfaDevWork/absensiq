@@ -3,15 +3,17 @@ import 'dart:io';
 
 import 'package:absensiq/api/api_endpoints.dart';
 import 'package:absensiq/models/attendance_record.dart';
+import 'package:absensiq/models/attendance_stats.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:http/http.dart' as http;
+
 
 class AttendanceService {
   final AuthService _authService = AuthService();
 
   Future<String> _getAuthToken() async {
     final token = await _authService.getToken();
-    if (token == null) throw 'Sesi anda telah berakhir. Silakan login kembali';
+    if (token == null) throw 'Sesi Anda telah berakhir. Silakan login kembali.';
     return token;
   }
 
@@ -92,7 +94,10 @@ class AttendanceService {
     }
   }
 
-  Future<Map<String, dynamic>> submitIzin({required String alasan}) async {
+  Future<Map<String, dynamic>> submitIzin({
+    required String alasan,
+    required String date,
+  }) async {
     final token = await _getAuthToken();
     final url = Uri.parse(ApiEndpoints.submitIzin);
     try {
@@ -101,13 +106,21 @@ class AttendanceService {
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
         },
-        body: {'alasan_izin': alasan},
+        body: json.encode({'alasan_izin': alasan, 'date': date}),
       );
-      return json.decode(response.body);
+
+      final responseData = json.decode(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return responseData;
+      } else {
+        throw responseData['message'] ?? 'Gagal mengajukan izin.';
+      }
     } on SocketException {
       throw 'Tidak dapat terhubung ke server.';
     } catch (e) {
+      print('Error in submitIzin: $e');
       throw e.toString();
     }
   }
@@ -127,13 +140,49 @@ class AttendanceService {
     } on SocketException {
       throw 'Tidak dapat terhubung ke server.';
     } catch (e) {
+      print('Error in getTodayAttendance: $e');
       throw e.toString();
     }
   }
 
-  Future<List<AttendanceRecord>> getAttendanceHistory({int limit = 10}) async {
+  Future<AttendanceStats> getAttendanceStats() async {
     final token = await _getAuthToken();
-    final url = Uri.parse('${ApiEndpoints.attendanceHistory}?limit=$limit');
+    final url = Uri.parse(ApiEndpoints.attendanceStats);
+    try {
+      final response = await http.get(
+        url,
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      final responseData = json.decode(response.body);
+      if (response.statusCode == 200) {
+        return AttendanceStats.fromJson(responseData['data']);
+      } else {
+        throw responseData['message'] ?? 'Gagal memuat statistik.';
+      }
+    } on SocketException {
+      throw 'Tidak dapat terhubung ke server.';
+    } catch (e) {
+      print('Error in getAttendanceStats: $e');
+      throw e.toString();
+    }
+  }
+
+  // PERUBAHAN: Menambahkan parameter tanggal untuk filter
+  Future<List<AttendanceRecord>> getAttendanceHistory({
+    String? startDate,
+    String? endDate,
+    required int limit,
+  }) async {
+    final token = await _getAuthToken();
+    var url = Uri.parse(ApiEndpoints.attendanceHistory);
+
+    if (startDate != null && endDate != null) {
+      url = url.replace(queryParameters: {'start': startDate, 'end': endDate});
+    }
+
     try {
       final response = await http.get(
         url,
@@ -151,6 +200,7 @@ class AttendanceService {
     } on SocketException {
       throw 'Tidak dapat terhubung ke server.';
     } catch (e) {
+      print('Error in getAttendanceHistory: $e');
       throw e.toString();
     }
   }
