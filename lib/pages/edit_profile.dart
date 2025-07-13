@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:absensiq/models/user.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:absensiq/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({super.key});
+  final User currentUser;
+  const EditProfilePage({super.key, required this.currentUser});
   static const String id = "/edit_profile";
 
   @override
@@ -17,11 +21,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
   User? _user;
   bool _isLoading = true;
   String? _errorMessage;
+  File? _profileImage;
+  final ImagePicker _picker = ImagePicker();
 
   @override
   void initState() {
     super.initState();
     _loadAllData();
+  }
+
+  Future<void> _pickImage() async {
+    final XFile? pickedFile = await _picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 80,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        _profileImage = File(pickedFile.path);
+      });
+    }
   }
 
   Future<void> _loadAllData() async {
@@ -66,10 +84,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               onRefresh: _loadAllData,
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Center(child: CircleAvatar(radius: 50)),
-                  ),
+                  _buildProfilePicker(),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 30,
@@ -93,6 +108,42 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ],
               ),
             ),
+    );
+  }
+
+  Widget _buildProfilePicker() {
+    ImageProvider currentImage;
+    if (_profileImage != null) {
+      currentImage = FileImage(_profileImage!);
+    } else if (widget.currentUser.profilePhotoUrl != null &&
+        widget.currentUser.profilePhotoUrl!.isNotEmpty) {
+      currentImage = NetworkImage(widget.currentUser.profilePhotoUrl!);
+    } else {
+      currentImage = const AssetImage('assets/images/dinkon.jpg');
+    }
+
+    return Center(
+      child: Column(
+        children: [
+          CircleAvatar(
+            radius: 52,
+            backgroundColor: Colors.grey,
+            child: CircleAvatar(
+              radius: 50,
+              backgroundColor: Colors.white,
+              foregroundImage: currentImage,
+              onForegroundImageError: (exception, stackTrace) {},
+              child: const Icon(Icons.person, size: 50, color: Colors.grey),
+            ),
+          ),
+          const SizedBox(height: 8),
+          TextButton.icon(
+            onPressed: _pickImage,
+            icon: const Icon(Icons.camera_alt_outlined, size: 20),
+            label: const Text('Ubah Foto Profil'),
+          ),
+        ],
+      ),
     );
   }
 }

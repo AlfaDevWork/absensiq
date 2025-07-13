@@ -1,3 +1,4 @@
+import 'package:absensiq/models/user.dart';
 import 'package:absensiq/pages/absen_page.dart';
 import 'package:absensiq/pages/auths/forgot_password.dart';
 import 'package:absensiq/pages/auths/login_page.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         RegisterPage.id: (context) => RegisterPage(),
         ForgotPasswordPage.id: (context) => ForgotPasswordPage(),
         ResetPasswordPage.id: (context) => ResetPasswordPage(),
-        EditProfilePage.id: (context) => EditProfilePage(),
+        EditProfilePage.id: (context) => EditProfilePage(currentUser: ),
       },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

@@ -376,21 +376,33 @@ class _AbsenPageState extends State<AbsenPage> {
   Center _buildActionButton() {
     bool canCheckIn = !_hasCheckedIn;
     bool canCheckOut = _hasCheckedIn && !_hasCheckedOut;
+    String buttonText = "Check In";
+    VoidCallback? onPressed = canCheckIn ? _handleCheckIn : null;
+
+    if (canCheckOut) {
+      buttonText = "Check Out";
+      onPressed = _handleCheckOut;
+    } else if (_hasCheckedIn && _hasCheckedOut) {
+      buttonText = "Completed";
+      onPressed = null;
+    }
 
     return Center(
       child: SizedBox(
         height: 45,
         width: 340,
         child: ElevatedButton(
-          onPressed: () {
-            _isSubmitting
-                ? null
-                : (canCheckIn
-                      ? _handleCheckIn
-                      : (canCheckOut ? _handleCheckOut : null));
-          },
-          style: ElevatedButton.styleFrom(backgroundColor: Color(0xff113289)),
-          child: Text('Check In', style: TextStyle(color: Colors.white)),
+          onPressed: _isSubmitting ? null : onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color(0xff113289),
+            // Disable button when submitting or when the action is not allowed
+            disabledBackgroundColor: Colors.grey,
+          ),
+          child: _isSubmitting
+              ? const CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                )
+              : Text(buttonText, style: TextStyle(color: Colors.white)),
         ),
       ),
     );

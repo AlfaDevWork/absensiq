@@ -68,25 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Center(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 72),
-                          child: CircleAvatar(radius: 50),
-                        ),
-                        SizedBox(height: 12),
-                        Text(_user?.name ?? 'Nama Pengguna'),
-                        SizedBox(
-                          child: Expanded(
-                            child: Text(
-                              '${_user?.trainingTitle ?? 'Pelatihan'} - Batch ${_user?.batchKe ?? ''}',
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  _buildHeader(),
                   SizedBox(height: 35),
                   Divider(),
                   ListTile(
@@ -144,6 +126,40 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
+    );
+  }
+
+  Center _buildHeader() {
+    final profileImage =
+        _user?.profilePhotoUrl != null && _user!.profilePhotoUrl!.isNotEmpty
+        ? NetworkImage(_user!.profilePhotoUrl!)
+        : const AssetImage('assets/images/noprofilepicture.jpg')
+              as ImageProvider;
+
+    return Center(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 72),
+            child: CircleAvatar(
+              radius: 50,
+              backgroundColor: Colors.white,
+              foregroundImage: profileImage,
+              onForegroundImageError: (exception, stackTrace) {},
+              child: const Icon(Icons.person, size: 50, color: Colors.grey),
+            ),
+          ),
+          SizedBox(height: 12),
+          Text(_user?.name ?? 'Nama Pengguna'),
+          SizedBox(
+            child: Expanded(
+              child: Text(
+                '${_user?.trainingTitle ?? 'Pelatihan'} - Batch ${_user?.batchKe ?? ''}',
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

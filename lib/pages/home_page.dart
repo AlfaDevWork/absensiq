@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:absensiq/constant/app_color.dart';
 import 'package:absensiq/models/attendance_record.dart';
 import 'package:absensiq/models/user.dart';
@@ -8,6 +10,7 @@ import 'package:absensiq/widgets/attendance_history_card.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -134,34 +137,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 78, left: 28),
-                          child: CircleAvatar(radius: 35),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 70, left: 15),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  _getGreeting(),
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: 3),
-                                Text(_user?.name ?? 'Nama Pengguna'),
-                                SizedBox(height: 3),
-                                Text(
-                                  '${_user?.trainingTitle ?? 'Pelatihan'} - Batch ${_user?.batchKe ?? ''}',
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    _buildHeader(),
                     SizedBox(height: 18),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 26),
@@ -281,46 +257,23 @@ class _HomePageState extends State<HomePage> {
                           color: Color(0x3084BFFF),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 32, top: 10),
-                          child: Row(
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('Distance from place'),
-                                  Text(
-                                    _distance,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Spacer(),
-                              TextButton(
-                                onPressed: () {},
-                                child: Container(
-                                  width: 100,
-                                  height: 35,
-                                  decoration: BoxDecoration(
-                                    color: AppColor.darkblue,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'Open Maps',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('Distance from place'),
+                                Text(
+                                  _distance,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -363,7 +316,7 @@ class _HomePageState extends State<HomePage> {
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
-                            itemCount: _attendanceHistory.length,
+                            itemCount: min(3, _attendanceHistory.length),
                             itemBuilder: (BuildContext context, int index) =>
                                 AttendanceHistoryCard(
                                   record: _attendanceHistory[index],
@@ -373,6 +326,49 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+    );
+  }
+
+  Row _buildHeader() {
+    final profileImage =
+        _user?.profilePhotoUrl != null && _user!.profilePhotoUrl!.isNotEmpty
+        ? NetworkImage(_user!.profilePhotoUrl!)
+        : AssetImage('assets/images/noprofilepicture.jpg') as ImageProvider;
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 78, left: 28),
+          child: CircleAvatar(
+            radius: 35,
+            backgroundColor: Colors.lightBlueAccent,
+            foregroundImage: profileImage,
+            onForegroundImageError: (e, s) {},
+            child: Icon(Icons.person, size: 28, color: Colors.grey),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 70, left: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${_getGreeting()} ${_user?.name ?? 'Nama Pengguna'}',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 3),
+                Text(
+                  DateFormat('dd MMMM yyyy', 'id_ID').format(DateTime.now()),
+                ),
+                SizedBox(height: 3),
+                Text(
+                  '${_user?.trainingTitle ?? 'Pelatihan'} - Batch ${_user?.batchKe ?? ''}',
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

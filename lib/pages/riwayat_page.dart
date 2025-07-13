@@ -1,9 +1,55 @@
-import 'package:absensiq/constant/app_color.dart';
+import 'package:absensiq/models/attendance_record.dart';
+import 'package:absensiq/models/attendance_stats.dart';
+import 'package:absensiq/services/attendance_service.dart';
+import 'package:absensiq/widgets/attendance_history_card.dart';
 import 'package:flutter/material.dart';
 
-class RiwayatPage extends StatelessWidget {
+class RiwayatPage extends StatefulWidget {
   const RiwayatPage({super.key});
   static const String id = "/riwayat";
+
+  @override
+  State<RiwayatPage> createState() => _RiwayatPageState();
+}
+
+class _RiwayatPageState extends State<RiwayatPage> {
+  final AttendanceService _attendanceService = AttendanceService();
+
+  List<AttendanceRecord> _history = [];
+  AttendanceStats? _stats;
+  bool _isLoading = true;
+  String? _errorMessage;
+
+  Future<void> _fetchData() async {
+    if (!mounted) return;
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final results = await Future.wait([
+        _attendanceService.getAttendanceStats(),
+        _attendanceService.getAttendanceHistory(limit: 100),
+      ]);
+
+      if (mounted) {
+        setState(() {
+          _stats = results[0] as AttendanceStats;
+          _history = results[1] as List<AttendanceRecord>;
+        });
+      }
+    } catch (e) {
+      if (mounted) setState(() => _errorMessage = e.toString());
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,69 +65,20 @@ class RiwayatPage extends StatelessWidget {
         centerTitle: true,
         title: Text('Riwayat Kehadiran'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                    left: 33,
-                    right: 33,
-                    bottom: 15,
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: AppColor.border),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Monday'),
-                              SizedBox(height: 4),
-                              Text('13-Jun-25'),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Column(
-                                children: [
-                                  Text('Check In'),
-                                  SizedBox(height: 4),
-                                  Text('Jam'),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  Text('Check Out'),
-                                  SizedBox(height: 4),
-                                  Text('Jam'),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
+      body: RefreshIndicator(
+        onRefresh: _fetchData,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: _history.length,
+                itemBuilder: (BuildContext context, int index) =>
+                    AttendanceHistoryCard(record: _history[index]),
+              ),
+            ],
+          ),
         ),
       ),
     );
