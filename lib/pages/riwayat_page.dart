@@ -78,7 +78,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
-                  childAspectRatio: 2.5,
+                  childAspectRatio: 2,
                   children: [
                     _StatCard(
                       title: 'Hadir',
