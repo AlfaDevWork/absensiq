@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:absensiq/models/user.dart';
 import 'package:absensiq/services/auth_service.dart';
+import 'package:absensiq/widgets/custom_button.dart';
 import 'package:absensiq/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,17 +18,20 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   final AuthService _authService = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  late final TextEditingController _nameController;
+  late final TextEditingController _emailController;
 
   User? _user;
-  bool _isLoading = true;
-  String? _errorMessage;
+  bool _isLoading = false;
   File? _profileImage;
   final ImagePicker _picker = ImagePicker();
 
   @override
   void initState() {
     super.initState();
-    _loadAllData();
+    _nameController = TextEditingController(text: widget.currentUser.name);
+    _emailController = TextEditingController(text: widget.currentUser.email);
   }
 
   Future<void> _pickImage() async {
@@ -42,32 +46,52 @@ class _EditProfilePageState extends State<EditProfilePage> {
     }
   }
 
-  Future<void> _loadAllData() async {
-    if (!mounted) return;
-    setState(() {
-      _isLoading = true;
-      _errorMessage = null;
-    });
+
+  Future<void> _handleUpdateProfile() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _isLoading = true);
+    String? successMessage;
 
     try {
-      final results = await Future.wait({_authService.getUserProfile()});
+      final textResponse = await _authService.updateUserProfile(
+        name: _nameController.text,
+        email: _emailController.text,
+      );
+      successMessage = textResponse['message'];
+
+      if (_profileImage != null) {
+        final photoResponse = await _authService.updateProfilePhoto(
+          photo: _profileImage!,
+        );
+        successMessage = photoResponse['message'];
+      }
 
       if (mounted) {
-        setState(() {
-          _user = results[0];
-        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(successMessage ?? 'Profil berhasil diperbarui'),
+            backgroundColor: Colors.green,
+            behavior: SnackBarBehavior.floating,
+            margin: const EdgeInsets.all(16),
+          ),
+        );
+        Navigator.of(context).pop(true);
       }
     } catch (e) {
       if (mounted) {
-        setState(() {
-          _errorMessage = e.toString();
-        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString()),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            margin: const EdgeInsets.all(16),
+          ),
+        );
       }
     } finally {
       if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
+        setState(() => _isLoading = false);
       }
     }
   }
@@ -75,39 +99,42 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text('Ubah Profil'), centerTitle: true),
-      body: _isLoading
-          ? Center(child: CircularProgressIndicator())
-          : _errorMessage != null
-          ? Center(child: Text(_errorMessage!))
-          : RefreshIndicator(
-              onRefresh: _loadAllData,
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            _buildProfilePicker(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 32),
               child: Column(
                 children: [
-                  _buildProfilePicker(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 30,
-                      vertical: 32,
-                    ),
-                    child: Column(
-                      children: [
-                        CustomTextFormField(
-                          label: 'Nama',
-                          hintText: _user?.name ?? 'Nama Pengguna',
-                        ),
-                        SizedBox(height: 10),
-                        CustomTextFormField(
-                          label: 'Email',
-                          hintText: _user?.email ?? 'Email Pengunna',
-                          readOnly: true,
-                        ),
-                      ],
-                    ),
+                  CustomTextFormField(
+                    controller: _nameController,
+                    label: 'Nama',
+                    hintText: _user?.name ?? 'Nama Pengguna',
                   ),
+                  SizedBox(height: 10),
+                  CustomTextFormField(
+                    controller: _emailController,
+                    label: 'Email',
+                    hintText: _user?.email ?? 'Email Pengunna',
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 20),
+                  _isLoading
+                      ? Center(child: CircularProgressIndicator())
+                      : CustomButton(
+                          text: 'Simpan Perubahan',
+                          onPressed: _handleUpdateProfile,
+                        ),
                 ],
               ),
             ),
+          ],
+        ),
+      ),
     );
   }
 

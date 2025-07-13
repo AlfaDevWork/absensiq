@@ -38,7 +38,6 @@ class MyApp extends StatelessWidget {
         RegisterPage.id: (context) => RegisterPage(),
         ForgotPasswordPage.id: (context) => ForgotPasswordPage(),
         ResetPasswordPage.id: (context) => ResetPasswordPage(),
-        EditProfilePage.id: (context) => EditProfilePage(currentUser: ),
       },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

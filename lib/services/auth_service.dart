@@ -210,10 +210,9 @@ class AuthService {
   Future<Map<String, dynamic>> updateUserProfile({
     required String name,
     required String email,
-    required String jenisKelamin,
   }) async {
     final token = await getToken();
-    if (token == null) throw 'Token tidak ditemukan';
+    if (token == null) throw 'Token tidak ditemukan.';
 
     final url = Uri.parse(ApiEndpoints.profile);
     try {
@@ -224,11 +223,7 @@ class AuthService {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
         },
-        body: json.encode({
-          'name': name,
-          'email': email,
-          'jenis_kelamin': jenisKelamin,
-        }),
+        body: json.encode({'name': name, 'email': email}),
       );
 
       final responseData = json.decode(response.body);
