@@ -88,126 +88,120 @@ class _AbsenPageState extends State<AbsenPage> {
         centerTitle: true,
         title: Text('Kehadiran'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 320,
-              width: double.infinity,
-              child: GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: _currentPosition,
-                  zoom: 14,
-                ),
-                onMapCreated: (controller) {
-                  mapController = controller;
-                },
-                markers: _marker != null ? {_marker!} : {},
-                myLocationEnabled: true,
-                myLocationButtonEnabled: true,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 450,
+            width: double.infinity,
+            child: GoogleMap(
+              initialCameraPosition: CameraPosition(
+                target: _currentPosition,
+                zoom: 14,
               ),
+              onMapCreated: (controller) {
+                mapController = controller;
+              },
+              markers: _marker != null ? {_marker!} : {},
+              myLocationEnabled: true,
+              myLocationButtonEnabled: true,
             ),
-            SizedBox(height: 30),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 33),
-                  child: Text('Status: '),
+          ),
+          SizedBox(height: 30),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 33),
+                child: Text('Status: '),
+              ),
+              SizedBox(width: 12),
+              Text('data', style: TextStyle(fontWeight: FontWeight.bold)),
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 33),
+                child: Text('Alamat:'),
+              ),
+              SizedBox(width: 12),
+              Flexible(
+                child: Text(
+                  'Jl. Pangeran Diponegoro No 5, Kec. Medan Petisah, Kota Medan, Sumatra Utara',
                 ),
-                SizedBox(width: 12),
-                Text('data', style: TextStyle(fontWeight: FontWeight.bold)),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 33),
-                  child: Text('Alamat:'),
-                ),
-                SizedBox(width: 12),
-                Flexible(
-                  child: Text(
-                    'Jl. Pangeran Diponegoro No 5, Kec. Medan Petisah, Kota Medan, Sumatra Utara',
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 36),
-            // Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(left: 33, right: 33, bottom: 15),
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppColor.border),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Monday'),
-                          SizedBox(height: 4),
-                          Text('13-Jun-25'),
-                        ],
-                      ),
+              ),
+            ],
+          ),
+          SizedBox(height: 36),
+          // Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(left: 33, right: 33, bottom: 15),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: AppColor.border),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Monday'),
+                        SizedBox(height: 4),
+                        Text('13-Jun-25'),
+                      ],
                     ),
-                    Expanded(
-                      flex: 3,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Column(
-                            children: [
-                              Text('Check In'),
-                              SizedBox(height: 4),
-                              Text('Jam'),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Text('Check Out'),
-                              SizedBox(height: 4),
-                              Text('Jam'),
-                            ],
-                          ),
-                        ],
-                      ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: [
+                            Text('Check In'),
+                            SizedBox(height: 4),
+                            Text('Jam'),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text('Check Out'),
+                            SizedBox(height: 4),
+                            Text('Jam'),
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 20),
-            Divider(),
-            SizedBox(height: 30),
-
-            Center(
-              child: SizedBox(
-                height: 45,
-                width: 340,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xff113289),
-                  ),
-                  child: Text(
-                    'Check In',
-                    style: TextStyle(color: Colors.white),
-                  ),
+          ),
+          Spacer(),
+          Divider(),
+          SizedBox(height: 20),
+          Center(
+            child: SizedBox(
+              height: 45,
+              width: 340,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xff113289),
                 ),
+                child: Text('Check In', style: TextStyle(color: Colors.white)),
               ),
             ),
-            SizedBox(height: 15),
-          ],
-        ),
+          ),
+          SizedBox(height: 15),
+        ],
       ),
     );
   }

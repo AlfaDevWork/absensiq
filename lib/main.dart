@@ -3,6 +3,7 @@ import 'package:absensiq/pages/auths/forgot_password.dart';
 import 'package:absensiq/pages/auths/login_page.dart';
 import 'package:absensiq/pages/auths/register_page.dart';
 import 'package:absensiq/pages/auths/reset_password.dart';
+import 'package:absensiq/pages/auths/splash_page.dart';
 import 'package:absensiq/pages/edit_profile.dart';
 import 'package:absensiq/pages/home_page.dart';
 import 'package:absensiq/pages/navigation.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginPage(),
+        '/': (context) => SplashPage(),
         NavigationPage.id: (context) => NavigationPage(),
         HomePage.id: (contect) => HomePage(),
         ProfilePage.id: (contect) => ProfilePage(),
