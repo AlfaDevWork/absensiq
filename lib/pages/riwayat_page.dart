@@ -74,8 +74,10 @@ class _RiwayatPageState extends State<RiwayatPage> {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: _history.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    AttendanceHistoryCard(record: _history[index]),
+                itemBuilder: (BuildContext context, int index) => Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: AttendanceHistoryCard(record: _history[index]),
+                ),
               ),
             ],
           ),
