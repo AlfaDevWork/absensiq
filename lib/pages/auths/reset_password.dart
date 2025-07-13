@@ -144,10 +144,19 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   image: AssetImage('assets/images/ppkd.jpg'),
                 ),
               ),
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  
+                  _buildHeader(context), const SizedBox(height: 20),
+                  Text(
+                    _timerText,
+                    style: const TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff113289),
+                      letterSpacing: 2,
+                    ),
+                  ),
                   // Text(
                   //   'Reset Password',
                   //   style: TextStyle(
@@ -238,7 +247,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () {
-                          _handleResetPassword;
+                          _handleResetPassword();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xff113289),
