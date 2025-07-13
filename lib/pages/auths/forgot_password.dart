@@ -1,4 +1,5 @@
 import 'package:absensiq/pages/auths/reset_password.dart';
+import 'package:absensiq/services/auth_service.dart';
 import 'package:absensiq/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,45 @@ class ForgotPasswordPage extends StatefulWidget {
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
+  final AuthService _authService = AuthService();
+  bool _isLoading = false;
+
+  Future<void> _handleSendOtp() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _isLoading = true);
+
+    try {
+      final response = await _authService.forgotPassword(
+        email: _emailController.text,
+      );
+      if (mounted) {
+        final message = response['message'] ?? 'OTP berhasil dikirim!';
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message), backgroundColor: Colors.green),
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ResetPasswordPage(
+              email: _emailController.text,
+              popOnSucces: false,
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.toString()), backgroundColor: Colors.red),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
 
   @override
   void dispose() {
@@ -89,47 +129,40 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
-                        if (value == null || !value.contains('@')) {
-                          return 'Masukkan email yang valid';
-                        }
+                        if (value == null || value.isEmpty)
+                          return 'Email tidak boleh kosong';
+                        if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value))
+                          return 'Format email tidak valid';
                         return null;
                       },
                     ),
                     const SizedBox(height: 20),
-
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            print(
-                              'Mengirim link reset ke: ${_emailController.text}',
-                            );
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                  'Link reset password telah dikirim!',
+                    _isLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                _handleSendOtp();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff113289),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.elliptical(4, 4),
+                                  ),
                                 ),
                               ),
-                            );
-                            Navigator.pushNamed(context, ResetPasswordPage.id);
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xff113289),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.elliptical(4, 4),
+                              child: const Text(
+                                'Kirim OTP',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                        child: const Text(
-                          'Kirim Link Reset',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),

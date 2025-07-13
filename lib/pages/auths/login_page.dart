@@ -1,5 +1,5 @@
+import 'package:absensiq/pages/auths/forgot_password.dart';
 import 'package:absensiq/pages/auths/register_page.dart';
-import 'package:absensiq/pages/auths/reset_password.dart';
 import 'package:absensiq/pages/navigation.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:absensiq/widgets/textformfield.dart';
@@ -192,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                         const Text('Lupa Kata Sandi?'),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, ResetPasswordPage.id);
+                            Navigator.pushNamed(context, ForgotPasswordPage.id);
                           },
                           child: const Text(
                             'Reset Password',

@@ -8,6 +8,7 @@ import 'package:absensiq/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 class AuthService {
   Future<List<Training>> getTrainings() async {
     final url = Uri.parse(ApiEndpoints.trainings);
@@ -23,7 +24,7 @@ class AuthService {
         throw 'Gagal memuat data pelatihan.';
       }
     } on SocketException {
-      throw 'Tidak dapat terhubung ke server. Periksa koneksi internet anda';
+      throw 'Tidak dapat terhubung ke server. Periksa koneksi internet Anda.';
     } catch (e) {
       throw e.toString();
     }
@@ -43,7 +44,7 @@ class AuthService {
         throw 'Gagal memuat data batch.';
       }
     } on SocketException {
-      throw 'Tidak dapat terhubung ke server. Periksa koneksi internet anda.';
+      throw 'Tidak dapat terhubung ke server. Periksa koneksi internet Anda.';
     } catch (e) {
       throw e.toString();
     }
@@ -60,7 +61,9 @@ class AuthService {
   }) async {
     final url = Uri.parse(ApiEndpoints.register);
     try {
-      Map<String, String> body = {
+      var request = http.MultipartRequest('POST', url);
+      request.headers['Accept'] = 'application/json';
+      request.fields.addAll({
         'name': name,
         'email': email,
         'password': password,
@@ -68,23 +71,16 @@ class AuthService {
         'jenis_kelamin': jenisKelamin,
         'batch_id': batchId,
         'training_id': trainingId,
-      };
+      });
 
       if (profilePhoto != null) {
-        List<int> imageBytes = await profilePhoto.readAsBytes();
-        String base64Image = base64Encode(imageBytes);
-        body['profile_photo'] = 'data:image/jpeg;base64,$base64Image';
+        request.files.add(
+          await http.MultipartFile.fromPath('profile_photo', profilePhoto.path),
+        );
       }
 
-      final response = await http.post(
-        url,
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: json.encode(body),
-      );
-
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
       final responseData = json.decode(response.body);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -96,7 +92,7 @@ class AuthService {
         throw responseData['message'] ?? 'Terjadi kesalahan registrasi.';
       }
     } on SocketException {
-      throw 'Tidak dapat terhubung ke server';
+      throw 'Tidak dapat terhubung ke server.';
     } catch (e) {
       throw e.toString();
     }
@@ -121,7 +117,7 @@ class AuthService {
         }
         return responseData;
       } else {
-        throw responseData['message'] ?? 'Email atau password salah';
+        throw responseData['message'] ?? 'Email atau password salah.';
       }
     } on SocketException {
       throw 'Tidak dapat terhubung ke server.';
@@ -138,11 +134,11 @@ class AuthService {
         headers: {'Accept': 'application/json'},
         body: {'email': email},
       );
-      final responeData = json.decode(response.body);
+      final responseData = json.decode(response.body);
       if (response.statusCode == 200) {
-        return responeData;
+        return responseData;
       } else {
-        throw responeData['message'] ?? 'Gagal mengirim OTP.';
+        throw responseData['message'] ?? 'Gagal mengirim OTP.';
       }
     } on SocketException {
       throw 'Tidak dapat terhubung ke server.';
@@ -175,7 +171,7 @@ class AuthService {
         throw responseData['message'] ?? 'Gagal mereset password.';
       }
     } on SocketException {
-      throw 'Tidak dapat terhubung ke server';
+      throw 'Tidak dapat terhubung ke server.';
     } catch (e) {
       throw e.toString();
     }
@@ -183,7 +179,7 @@ class AuthService {
 
   Future<User> getUserProfile() async {
     final token = await getToken();
-    if (token == null) throw 'Token tidak ditemukan. Silahkan login kembali.';
+    if (token == null) throw 'Token tidak ditemukan. Silakan login kembali.';
 
     final url = Uri.parse(ApiEndpoints.profile);
     try {
@@ -198,10 +194,10 @@ class AuthService {
       if (response.statusCode == 200) {
         return User.fromJson(json.decode(response.body));
       } else {
-        throw 'Gagal mengambil data profil';
+        throw 'Gagal mengambil data profil.';
       }
     } on SocketException {
-      throw 'Tidak dapat terhubung ke server';
+      throw 'Tidak dapat terhubung ke server.';
     } catch (e) {
       throw e.toString();
     }
@@ -244,28 +240,34 @@ class AuthService {
 
   Future<Map<String, dynamic>> updateProfilePhoto({required File photo}) async {
     final token = await getToken();
-    if (token == null) throw 'Token tidak ditemukan';
+    if (token == null) throw 'Token tidak ditemukan.';
 
     final url = Uri.parse(ApiEndpoints.updateProfilePhoto);
     try {
-      var request = http.MultipartRequest('POST', url);
-      request.headers['Accept'] = 'application/json';
-      request.headers['Authorization'] = 'Bearer $token';
-      request.files.add(
-        await http.MultipartFile.fromPath('profile_photo', photo.path),
+      List<int> imageBytes = await photo.readAsBytes();
+      String base64Image = base64Encode(imageBytes);
+
+      final response = await http.put(
+        url,
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'profile_photo': 'data:image/jpeg;base64,$base64Image',
+        }),
       );
 
-      var streamedResponse = await request.send();
-      var response = await http.Response.fromStream(streamedResponse);
       final responseData = json.decode(response.body);
 
       if (response.statusCode == 200) {
         return responseData;
       } else {
-        throw responseData['message'] ?? 'Gagal memperbarui foto profil';
+        throw responseData['message'] ?? 'Gagal memperbarui foto profil.';
       }
     } on SocketException {
-      throw 'Tidak dapat terhubung ke server';
+      throw 'Tidak dapat terhubung ke server.';
     } catch (e) {
       throw e.toString();
     }
@@ -283,7 +285,7 @@ class AuthService {
       await http.post(
         url,
         headers: {
-          'Accept': 'Application/json',
+          'Accept': 'application/json',
           'Authorization': 'Bearer $token',
         },
       );

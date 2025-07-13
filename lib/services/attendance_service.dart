@@ -7,7 +7,6 @@ import 'package:absensiq/models/attendance_stats.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:http/http.dart' as http;
 
-
 class AttendanceService {
   final AuthService _authService = AuthService();
 
