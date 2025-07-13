@@ -148,29 +148,27 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildHeader(context), const SizedBox(height: 20),
-                  Text(
-                    _timerText,
-                    style: const TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff113289),
-                      letterSpacing: 2,
+                  _buildHeader(context),
+                  const SizedBox(height: 20),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white70,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      _timerText,
+                      style: const TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff113289),
+                        letterSpacing: 2,
+                      ),
                     ),
                   ),
-                  // Text(
-                  //   'Reset Password',
-                  //   style: TextStyle(
-                  //     fontSize: 32,
-                  //     fontWeight: FontWeight.bold,
-                  //     color: Colors.white,
-                  //   ),
-                  // ),
-                  // SizedBox(height: 15),
-                  // Text(
-                  //   'Masukan OTP dan buat kata sandi baru Anda',
-                  //   style: TextStyle(fontSize: 14, color: Color(0xB3ffffff)),
-                  // ),
                 ],
               ),
             ),
