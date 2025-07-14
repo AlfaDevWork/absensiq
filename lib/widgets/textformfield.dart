@@ -36,6 +36,7 @@ class CustomTextFormField extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormField(
+            autofocus: false,
             readOnly: readOnly,
             autovalidateMode: AutovalidateMode.onUnfocus,
             controller: controller,

@@ -7,6 +7,7 @@ import 'package:absensiq/pages/riwayat_page.dart';
 import 'package:absensiq/services/attendance_service.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:absensiq/widgets/attendance_history_card.dart';
+import 'package:absensiq/widgets/izin_history_card.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -54,7 +55,7 @@ class _HomePageState extends State<HomePage> {
       final results = await Future.wait([
         _authService.getUserProfile(),
         _attendanceService.getTodayAttendance(),
-        _attendanceService.getAttendanceHistory(limit: 3),
+        _attendanceService.getAttendanceHistory(),
         _getCurrentPosition(),
       ]);
 
@@ -142,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 26),
                       child: Container(
-                        height: 160,
+                        height: 180,
                         decoration: BoxDecoration(
                           color: AppColor.main,
                           borderRadius: BorderRadius.circular(10),
@@ -317,10 +318,14 @@ class _HomePageState extends State<HomePage> {
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             itemCount: min(3, _attendanceHistory.length),
-                            itemBuilder: (BuildContext context, int index) =>
-                                AttendanceHistoryCard(
-                                  record: _attendanceHistory[index],
-                                ),
+                            itemBuilder: (BuildContext context, int index) {
+                              final record = _attendanceHistory[index];
+                              if (record.status.toLowerCase() == 'izin') {
+                                return IzinHistoryCard(record: record);
+                              } else {
+                                return AttendanceHistoryCard(record: record);
+                              }
+                            },
                           ),
                   ],
                 ),

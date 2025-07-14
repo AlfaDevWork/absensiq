@@ -29,7 +29,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
     try {
       final results = await Future.wait([
         _attendanceService.getAttendanceStats(),
-        _attendanceService.getAttendanceHistory(limit: 100),
+        _attendanceService.getAttendanceHistory(),
       ]);
 
       if (mounted) {

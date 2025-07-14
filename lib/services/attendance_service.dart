@@ -173,7 +173,6 @@ class AttendanceService {
   Future<List<AttendanceRecord>> getAttendanceHistory({
     String? startDate,
     String? endDate,
-    required int limit,
   }) async {
     final token = await _getAuthToken();
     var url = Uri.parse(ApiEndpoints.attendanceHistory);

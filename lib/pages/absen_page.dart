@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:absensiq/constant/app_color.dart';
+import 'package:absensiq/pages/izin_page.dart';
 import 'package:absensiq/services/attendance_service.dart';
+import 'package:absensiq/widgets/custom_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -166,7 +168,7 @@ class _AbsenPageState extends State<AbsenPage> {
       // PERBAIKAN: Langsung perbarui state UI setelah berhasil untuk mencegah double tap
       setState(() {
         _hasCheckedIn = true;
-        _status = 'masuk';
+        _status = 'Masuk';
         _checkInTime = DateFormat('HH:mm').format(DateTime.now());
       });
     } catch (e) {
@@ -366,7 +368,17 @@ class _AbsenPageState extends State<AbsenPage> {
           ),
           Spacer(),
           Divider(),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
+          StyledActionButton(
+            title: 'Pengajuan Izin',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => IzinPage()),
+              );
+            },
+          ),
+          SizedBox(height: 10),
           _buildActionButton(),
           SizedBox(height: 15),
         ],
