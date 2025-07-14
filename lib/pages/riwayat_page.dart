@@ -2,6 +2,7 @@ import 'package:absensiq/models/attendance_record.dart';
 import 'package:absensiq/models/attendance_stats.dart';
 import 'package:absensiq/services/attendance_service.dart';
 import 'package:absensiq/widgets/attendance_history_card.dart';
+import 'package:absensiq/widgets/izin_history_card.dart';
 import 'package:flutter/material.dart';
 
 class RiwayatPage extends StatefulWidget {
@@ -94,15 +95,24 @@ class _RiwayatPageState extends State<RiwayatPage> {
                   ],
                 ),
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: _history.length,
-                itemBuilder: (BuildContext context, int index) => Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: AttendanceHistoryCard(record: _history[index]),
-                ),
-              ),
+              _history.isEmpty
+                  ? Padding(
+                      padding: EdgeInsetsGeometry.symmetric(vertical: 24),
+                      child: Center(child: Text('Belum ada riwayat kehadiran')),
+                    )
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: _history.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final record = _history[index];
+                        if (record.status.toLowerCase() == 'izin') {
+                          return IzinHistoryCard(record: record);
+                        } else {
+                          return AttendanceHistoryCard(record: record);
+                        }
+                      },
+                    ),
             ],
           ),
         ),
