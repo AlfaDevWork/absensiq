@@ -21,7 +21,7 @@ class ApiEndpoints {
   // Endpoint Absensi & Izin
   static final String checkIn = '$baseUrl/absen/check-in';
   static final String checkOut = '$baseUrl/absen/check-out';
-  static final String submitIzin = '$baseUrl/absen/izin';
+  static final String submitIzin = '$baseUrl/izin';
   static final String todayAttendance = '$baseUrl/absen/today';
   static final String attendanceHistory = '$baseUrl/absen/history';
   static final String attendanceStats = '$baseUrl/absen/stats';

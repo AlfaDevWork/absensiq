@@ -132,67 +132,71 @@ class _IzinPageState extends State<IzinPage> {
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 10),
-                    Text(
-                      'Pilih tanggal dan berikan alasan \nketidakhadiran Anda.',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 10),
+                      Text(
+                        'Pilih tanggal dan berikan alasan \nketidakhadiran Anda.',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 32),
-                    InkWell(
-                      onTap: _pickDateRange,
-                      child: InputDecorator(
+                      SizedBox(height: 32),
+                      InkWell(
+                        onTap: _pickDateRange,
+                        child: InputDecorator(
+                          decoration: InputDecoration(
+                            labelText: 'Tanggal Izin',
+                            prefixIcon: Icon(Icons.calendar_today_outlined),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.elliptical(4, 4),
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            _selectedDates.isEmpty
+                                ? 'Pilih Tanggal'
+                                : _selectedDates
+                                      .map(
+                                        (d) =>
+                                            DateFormat('dd/MM/yy').format(d!),
+                                      )
+                                      .join(', '),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      TextFormField(
+                        controller: _reasonController,
                         decoration: InputDecoration(
-                          labelText: 'Tanggal Izin',
-                          prefixIcon: Icon(Icons.calendar_today_outlined),
+                          labelText: 'Alasan Izin',
+                          hintText: 'Contoh: Sakit, acara keluarga, dll.',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                               Radius.elliptical(4, 4),
                             ),
+                            borderSide: const BorderSide(color: Colors.grey),
                           ),
                         ),
-                        child: Text(
-                          _selectedDates.isEmpty
-                              ? 'Pilih Tanggal'
-                              : _selectedDates
-                                    .map(
-                                      (d) => DateFormat('dd/MM/yy').format(d!),
-                                    )
-                                    .join(', '),
-                        ),
+                        maxLines: 4,
+                        validator: (v) =>
+                            v!.isEmpty ? 'Alasan tidak boleh kosong' : null,
                       ),
-                    ),
-                    SizedBox(height: 16),
-                    TextFormField(
-                      controller: _reasonController,
-                      decoration: InputDecoration(
-                        labelText: 'Alasan Izin',
-                        hintText: 'Contoh: Sakit, acara keluarga, dll.',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.elliptical(4, 4),
-                          ),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                      ),
-                      maxLines: 4,
-                      validator: (v) =>
-                          v!.isEmpty ? 'Alasan tidak boleh kosong' : null,
-                    ),
-                    SizedBox(height: 32),
-                    _isLoading
-                        ? Center(child: CircularProgressIndicator())
-                        : CustomButton(
-                            text: 'Kirim Pengajuan',
-                            onPressed: _handleSubmitIzin,
-                          ),
-                    SizedBox(height: 32),
-                  ],
+                      SizedBox(height: 32),
+                      _isLoading
+                          ? Center(child: CircularProgressIndicator())
+                          : CustomButton(
+                              text: 'Kirim Pengajuan',
+                              onPressed: _handleSubmitIzin,
+                            ),
+                      SizedBox(height: 32),
+                    ],
+                  ),
                 ),
               ),
             ),
