@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Hallo!',
+                      'Halo!',
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SizedBox(height: 15),
                     Text(
-                      'Please login to get full access from us',
+                      'Silakan masuk untuk mendapatkan akses penuh',
                       style: TextStyle(fontSize: 14, color: Color(0xB3ffffff)),
                     ),
                   ],
@@ -177,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                               child: const Text(
-                                'Login',
+                                'Masuk',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -195,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.pushNamed(context, ForgotPasswordPage.id);
                           },
                           child: const Text(
-                            'Reset Password',
+                            'Atur Ulang Kata Sandi',
                             style: TextStyle(color: Color(0xff113289)),
                           ),
                         ),

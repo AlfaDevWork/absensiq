@@ -255,7 +255,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           ),
                         ),
                         child: const Text(
-                          'Reset Password',
+                          'Atur Ulang Kata Sandi',
                           style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ),
@@ -274,7 +274,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     return Column(
       children: [
         Text(
-          'Reset Kata Sandi',
+          'Atur Ulang Kata Sandi',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
 
           textAlign: TextAlign.center,

@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         ForgotPasswordPage.id: (context) => ForgotPasswordPage(),
       },
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'AbsensiQ',
       theme: ThemeData(
         // This is the theme of your application.
         //

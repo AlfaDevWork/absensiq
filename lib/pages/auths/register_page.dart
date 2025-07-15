@@ -125,10 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
         surfaceTintColor: Colors.white,
         automaticallyImplyLeading: false,
         title: Center(
-          child: const Text(
-            'Register Account',
-            style: TextStyle(color: Colors.white),
-          ),
+          child: const Text('Buat Akun', style: TextStyle(color: Colors.white)),
         ),
         backgroundColor: const Color(0xff113289),
         elevation: 1,
@@ -202,7 +199,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            'Training',
+                            'Pelatihan',
                             style: const TextStyle(
                               color: Colors.black,
                               fontSize: 16,
@@ -210,7 +207,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           const SizedBox(height: 10),
                           CustomDropdownSearch<Training>(
-                            hintText: 'Pilih Training',
+                            hintText: 'Pilih Pelatihan',
                             items: _trainings,
                             selectedItem: _selectedTraining,
                             itemLabel: (training) => training.title,
@@ -281,7 +278,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       ),
                                     ),
                                     child: const Text(
-                                      'Register',
+                                      'Daftar',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 16,
@@ -299,7 +296,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   Navigator.pushNamed(context, LoginPage.id);
                                 },
                                 child: const Text(
-                                  'Login Sekarang',
+                                  'Masuk Sekarang',
                                   style: TextStyle(color: Color(0xff113289)),
                                 ),
                               ),

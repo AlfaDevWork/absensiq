@@ -163,7 +163,7 @@ class _AbsenPageState extends State<AbsenPage> {
         date: DateFormat('yyyy-MM-dd').format(DateTime.now()),
         time: DateFormat('HH:mm').format(DateTime.now()),
       );
-      _showSnackBar(result['message'] ?? 'Check-in berhasil!');
+      _showSnackBar(result['message'] ?? 'Absen masuk berhasil!');
 
       // PERBAIKAN: Langsung perbarui state UI setelah berhasil untuk mencegah double tap
       setState(() {
@@ -192,7 +192,7 @@ class _AbsenPageState extends State<AbsenPage> {
         date: DateFormat('yyyy-MM-dd').format(DateTime.now()),
         time: DateFormat('HH:mm').format(DateTime.now()),
       );
-      _showSnackBar(result['message'] ?? 'Check-out berhasil!');
+      _showSnackBar(result['message'] ?? 'Absen pulang berhasil!');
 
       // PERBAIKAN: Langsung perbarui state UI setelah berhasil
       setState(() {
@@ -347,14 +347,14 @@ class _AbsenPageState extends State<AbsenPage> {
                       children: [
                         Column(
                           children: [
-                            Text('Check In'),
+                            Text('Masuk'),
                             SizedBox(height: 4),
                             Text(_checkInTime),
                           ],
                         ),
                         Column(
                           children: [
-                            Text('Check Out'),
+                            Text('Pulang'),
                             SizedBox(height: 4),
                             Text(_checkOutTime),
                           ],
@@ -389,14 +389,14 @@ class _AbsenPageState extends State<AbsenPage> {
   Center _buildActionButton() {
     bool canCheckIn = !_hasCheckedIn;
     bool canCheckOut = _hasCheckedIn && !_hasCheckedOut;
-    String buttonText = "Check In";
+    String buttonText = "Masuk";
     VoidCallback? onPressed = canCheckIn ? _handleCheckIn : null;
 
     if (canCheckOut) {
-      buttonText = "Check Out";
+      buttonText = "Pulang";
       onPressed = _handleCheckOut;
     } else if (_hasCheckedIn && _hasCheckedOut) {
-      buttonText = "Completed";
+      buttonText = "Selesai";
       onPressed = null;
     }
 

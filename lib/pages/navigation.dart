@@ -41,8 +41,8 @@ class _NavigationPageState extends State<NavigationPage> {
           },
           type: BottomNavigationBarType.fixed,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
           ],
         ),
       ),

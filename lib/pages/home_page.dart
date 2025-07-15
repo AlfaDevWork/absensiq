@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Check In',
+                                            'Masuk',
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white,
@@ -224,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Check Out',
+                                            'Pulang',
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white,
@@ -264,7 +264,7 @@ class _HomePageState extends State<HomePage> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Distance from place'),
+                                Text('Jarak dari lokasi'),
                                 Text(
                                   _distance,
                                   style: TextStyle(
@@ -362,9 +362,12 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '${_getGreeting()}, ${_user?.name ?? 'Nama Pengguna'}',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.only(right: 5),
+                  child: Text(
+                    '${_getGreeting()}, ${_user?.name ?? 'Nama Pengguna'}',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SizedBox(height: 3),
                 Text(

@@ -18,7 +18,7 @@ class AttendanceRecord {
   });
 
   bool get isLate {
-    if (status != 'masuk' || checkInTime == '-') return false;
+    if (status != 'Masuk' || checkInTime == '-') return false;
     try {
       final timeParts = checkInTime.split(':');
       final hour = int.parse(timeParts[0]);
@@ -65,7 +65,7 @@ class AttendanceRecord {
           (checkOutDate != null
               ? DateFormat('HH:mm').format(checkOutDate.toLocal())
               : '-'),
-      status: json['status'] ?? 'masuk',
+      status: json['status'] ?? 'Masuk',
       alasanIzin: json['alasan_izin'],
     );
   }

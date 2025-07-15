@@ -39,12 +39,7 @@ class _SplashPageState extends State<SplashPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Spacer(),
-            Icon(Icons.location_on, size: 100),
-            SizedBox(height: 10),
-            Text(
-              'AbsensiQ',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
+            Image.asset('assets/images/logo.png'),
             Spacer(),
             Text('V 1.0'),
           ],

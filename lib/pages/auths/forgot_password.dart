@@ -100,7 +100,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Reset Password',
+                      'Atur Ulang Kata Sandi',
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
@@ -156,7 +156,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 ),
                               ),
                               child: const Text(
-                                'Kirim OTP',
+                                'Kirim Kode OTP',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,

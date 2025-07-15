@@ -44,7 +44,7 @@ class AttendanceHistoryCard extends StatelessWidget {
                   Column(
                     children: [
                       const Text(
-                        'Check In',
+                        'Masuk',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 4),
@@ -54,7 +54,7 @@ class AttendanceHistoryCard extends StatelessWidget {
                   Column(
                     children: [
                       const Text(
-                        'Check Out',
+                        'Pulang',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 4),

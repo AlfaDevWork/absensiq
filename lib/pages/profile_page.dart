@@ -112,14 +112,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           context: context,
                           builder: (context) => AlertDialog(
                             title: Text(
-                              'Logout',
+                              'Keluar',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            content: Text('Are you sure you want to logout?'),
+                            content: Text('Apakah Anda yakin ingin keluar?'),
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.pop(context),
-                                child: Text('Cancel'),
+                                child: Text('Batal'),
                               ),
                               TextButton(
                                 onPressed: () async {
@@ -130,7 +130,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                     (route) => false,
                                   );
                                 },
-                                child: Text('Logout'),
+                                child: Text(
+                                  'Keluar',
+                                  style: TextStyle(color: Colors.red),
+                                ),
                               ),
                             ],
                           ),
@@ -175,12 +178,8 @@ class _ProfilePageState extends State<ProfilePage> {
             _user?.name ?? 'Nama Pengguna',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
-            child: Expanded(
-              child: Text(
-                '${_user?.trainingTitle ?? 'Pelatihan'} - Batch ${_user?.batchKe ?? ''}',
-              ),
-            ),
+          Text(
+            '${_user?.trainingTitle ?? 'Pelatihan'} - Batch ${_user?.batchKe ?? ''}',
           ),
         ],
       ),
