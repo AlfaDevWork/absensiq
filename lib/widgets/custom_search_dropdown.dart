@@ -50,18 +50,21 @@ class CustomDropdownSearch<T> extends StatelessWidget {
   void _showSearchDialog(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      isScrollControlled: true,
+      // isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (context) {
-        return _DropdownSearchDialog<T>(
-          items: items,
-          itemLabel: itemLabel,
-          onItemSelected: (value) {
-            Navigator.pop(context);
-            onChanged(value);
-          },
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.5,
+          child: _DropdownSearchDialog<T>(
+            items: items,
+            itemLabel: itemLabel,
+            onItemSelected: (value) {
+              Navigator.pop(context);
+              onChanged(value);
+            },
+          ),
         );
       },
     );
