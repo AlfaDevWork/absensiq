@@ -95,6 +95,8 @@ class _RiwayatPageState extends State<RiwayatPage> {
                   ],
                 ),
               ),
+              Divider(),
+              SizedBox(height: 10),
               _history.isEmpty
                   ? Padding(
                       padding: EdgeInsetsGeometry.symmetric(vertical: 24),
