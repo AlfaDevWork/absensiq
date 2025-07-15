@@ -291,7 +291,10 @@ class _AbsenPageState extends State<AbsenPage> {
                 child: Text('Status: '),
               ),
               SizedBox(width: 12),
-              Text(_status, style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(
+                capitalize(_status),
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ],
           ),
           SizedBox(height: 20),
@@ -421,3 +424,6 @@ class _AbsenPageState extends State<AbsenPage> {
     );
   }
 }
+
+String capitalize(String s) =>
+    s.isNotEmpty ? '${s[0].toUpperCase()}${s.substring(1)}' : s;

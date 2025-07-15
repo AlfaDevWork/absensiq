@@ -349,7 +349,7 @@ class _HomePageState extends State<HomePage> {
             ),
             child: CircleAvatar(
               radius: 35,
-              backgroundColor: Colors.lightBlueAccent,
+              backgroundColor: Colors.white,
               foregroundImage: profileImage,
               onForegroundImageError: (e, s) {},
               child: Icon(Icons.person, size: 50, color: Colors.grey),

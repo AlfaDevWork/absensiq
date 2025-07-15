@@ -166,7 +166,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               child: CircleAvatar(
                 radius: 50,
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.white,
                 foregroundImage: profileImage,
                 onForegroundImageError: (exception, stackTrace) {},
                 child: const Icon(Icons.person, size: 75, color: Colors.grey),

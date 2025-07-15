@@ -18,7 +18,7 @@ class AttendanceRecord {
   });
 
   bool get isLate {
-    if (status != 'Masuk' || checkInTime == '-') return false;
+    if (status != 'masuk' || checkInTime == '-') return false;
     try {
       final timeParts = checkInTime.split(':');
       final hour = int.parse(timeParts[0]);

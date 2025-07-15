@@ -150,7 +150,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
         widget.currentUser.profilePhotoUrl!.isNotEmpty) {
       currentImage = NetworkImage(widget.currentUser.profilePhotoUrl!);
     } else {
-      currentImage = const AssetImage('assets/images/noprofilepicture.png');
+      currentImage =
+          const AssetImage('assets/images/noprofilepictu.png') as ImageProvider;
     }
 
     return Center(
@@ -164,14 +165,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
               backgroundColor: Colors.white,
               foregroundImage: currentImage,
               onForegroundImageError: (exception, stackTrace) {},
-              child: const Icon(Icons.person, size: 50, color: Colors.grey),
+              child: const Icon(Icons.person, size: 75, color: Colors.grey),
             ),
           ),
           const SizedBox(height: 8),
           TextButton.icon(
             onPressed: _pickImage,
-            icon: const Icon(Icons.camera_alt_outlined, size: 20),
-            label: const Text('Ubah Foto Profil'),
+            icon: const Icon(
+              Icons.camera_alt_outlined,
+              size: 20,
+              color: Color(0xff113289),
+            ),
+            label: const Text(
+              'Ubah Foto Profil',
+              style: TextStyle(color: Color(0xff113289)),
+            ),
           ),
         ],
       ),
