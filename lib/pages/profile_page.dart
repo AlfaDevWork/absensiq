@@ -1,6 +1,6 @@
 import 'package:absensiq/models/user.dart';
-import 'package:absensiq/pages/auths/login_page.dart';
 import 'package:absensiq/pages/auths/change_password_request_screen.dart';
+import 'package:absensiq/pages/auths/login_page.dart';
 import 'package:absensiq/pages/edit_profile.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -157,16 +157,24 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 72),
-            child: CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.white,
-              foregroundImage: profileImage,
-              onForegroundImageError: (exception, stackTrace) {},
-              child: const Icon(Icons.person, size: 50, color: Colors.grey),
+            child: Container(
+              decoration: ShapeDecoration(
+                shape: CircleBorder(side: BorderSide(color: Colors.black)),
+              ),
+              child: CircleAvatar(
+                radius: 50,
+                backgroundColor: Colors.blue,
+                foregroundImage: profileImage,
+                onForegroundImageError: (exception, stackTrace) {},
+                child: const Icon(Icons.person, size: 75, color: Colors.grey),
+              ),
             ),
           ),
           SizedBox(height: 12),
-          Text(_user?.name ?? 'Nama Pengguna'),
+          Text(
+            _user?.name ?? 'Nama Pengguna',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
           SizedBox(
             child: Expanded(
               child: Text(

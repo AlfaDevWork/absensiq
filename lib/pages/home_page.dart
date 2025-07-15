@@ -343,12 +343,17 @@ class _HomePageState extends State<HomePage> {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 78, left: 28),
-          child: CircleAvatar(
-            radius: 35,
-            backgroundColor: Colors.lightBlueAccent,
-            foregroundImage: profileImage,
-            onForegroundImageError: (e, s) {},
-            child: Icon(Icons.person, size: 28, color: Colors.grey),
+          child: Container(
+            decoration: ShapeDecoration(
+              shape: CircleBorder(side: BorderSide(color: Colors.black)),
+            ),
+            child: CircleAvatar(
+              radius: 35,
+              backgroundColor: Colors.lightBlueAccent,
+              foregroundImage: profileImage,
+              onForegroundImageError: (e, s) {},
+              child: Icon(Icons.person, size: 50, color: Colors.grey),
+            ),
           ),
         ),
         Expanded(
@@ -358,7 +363,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${_getGreeting()} ${_user?.name ?? 'Nama Pengguna'}',
+                  '${_getGreeting()}, ${_user?.name ?? 'Nama Pengguna'}',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 3),

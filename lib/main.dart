@@ -1,11 +1,8 @@
-import 'package:absensiq/models/user.dart';
 import 'package:absensiq/pages/absen_page.dart';
 import 'package:absensiq/pages/auths/forgot_password.dart';
 import 'package:absensiq/pages/auths/login_page.dart';
 import 'package:absensiq/pages/auths/register_page.dart';
-import 'package:absensiq/pages/auths/reset_password.dart';
 import 'package:absensiq/pages/auths/splash_page.dart';
-import 'package:absensiq/pages/edit_profile.dart';
 import 'package:absensiq/pages/home_page.dart';
 import 'package:absensiq/pages/navigation.dart';
 import 'package:absensiq/pages/profile_page.dart';
@@ -58,7 +55,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
       ),
-      // home: LoginPage(),
+      // home: SplashPage(),
     );
   }
 }

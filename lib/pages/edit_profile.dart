@@ -46,7 +46,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
     }
   }
 
-
   Future<void> _handleUpdateProfile() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -101,7 +100,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: Text('Ubah Profil'), centerTitle: true, surfaceTintColor: Colors.white),
+      appBar: AppBar(
+        title: Text('Ubah Profil'),
+        centerTitle: true,
+        surfaceTintColor: Colors.white,
+      ),
       body: Form(
         key: _formKey,
         child: Column(
@@ -147,7 +150,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         widget.currentUser.profilePhotoUrl!.isNotEmpty) {
       currentImage = NetworkImage(widget.currentUser.profilePhotoUrl!);
     } else {
-      currentImage = const AssetImage('assets/images/dinkon.jpg');
+      currentImage = const AssetImage('assets/images/noprofilepicture.png');
     }
 
     return Center(
