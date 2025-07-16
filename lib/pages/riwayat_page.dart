@@ -73,35 +73,35 @@ class _RiwayatPageState extends State<RiwayatPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: GridView.count(
-                  crossAxisCount: 3,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 1.2,
-                  children: [
-                    _StatCard(
-                      title: 'Hadir',
-                      value: _stats?.totalMasuk.toString() ?? '0',
-                      color: Color(0x3084BFFF),
-                    ),
-                    _StatCard(
-                      title: 'Izin',
-                      value: _stats?.totalIzin.toString() ?? '0',
-                      color: Color(0x3084BFFF),
-                    ),
-                    _StatCard(
-                      title: 'Absen',
-                      value: _stats?.totalAbsen.toString() ?? '0',
-                      color: Color(0x3084BFFF),
-                    ),
-                  ],
-                ),
-              ),
-              Divider(indent: 27, endIndent: 27),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 25),
+              //   child: GridView.count(
+              //     crossAxisCount: 3,
+              //     shrinkWrap: true,
+              //     physics: const NeverScrollableScrollPhysics(),
+              //     crossAxisSpacing: 16,
+              //     mainAxisSpacing: 16,
+              //     childAspectRatio: 1.2,
+              //     children: [
+              //       _StatCard(
+              //         title: 'Hadir',
+              //         value: _stats?.totalMasuk.toString() ?? '0',
+              //         color: Color(0x3084BFFF),
+              //       ),
+              //       _StatCard(
+              //         title: 'Izin',
+              //         value: _stats?.totalIzin.toString() ?? '0',
+              //         color: Color(0x3084BFFF),
+              //       ),
+              //       _StatCard(
+              //         title: 'Absen',
+              //         value: _stats?.totalAbsen.toString() ?? '0',
+              //         color: Color(0x3084BFFF),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // Divider(indent: 27, endIndent: 27),
               SizedBox(height: 10),
               _history.isEmpty
                   ? Padding(
