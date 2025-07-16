@@ -12,28 +12,23 @@ class IzinHistoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      // Menggunakan padding seperti pada kartu referensi
       padding: const EdgeInsets.only(left: 26, right: 26, bottom: 15),
       child: Container(
-        // Menyesuaikan padding internal dan dekorasi container
         padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: AppColor.border,
-          ), // Menggunakan border, bukan shadow
+          border: Border.all(color: AppColor.border),
         ),
         child: Row(
           children: [
-            // Kolom untuk Hari dan Tanggal (flex: 2)
             Expanded(
               flex: 2,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${record.day},', // Menggabungkan hari dan tanggal
+                    '${record.day},',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -47,8 +42,7 @@ class IzinHistoryCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: 16),
-            // Kolom untuk Keterangan Izin (flex: 3)
+            const SizedBox(width: 20),
             Expanded(
               flex: 3,
               child: Row(
@@ -81,9 +75,6 @@ class IzinHistoryCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(width: 8),
-                  // Ikon status di ujung kanan
-                  const Icon(Icons.check_circle, color: Colors.green),
                 ],
               ),
             ),

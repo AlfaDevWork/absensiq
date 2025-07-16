@@ -57,7 +57,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        surfaceTintColor: Colors.white,
+        backgroundColor: Colors.transparent,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -85,17 +85,17 @@ class _RiwayatPageState extends State<RiwayatPage> {
                     _StatCard(
                       title: 'Hadir',
                       value: _stats?.totalMasuk.toString() ?? '0',
-                      color: Colors.green,
+                      color: Color(0xff113289),
                     ),
                     _StatCard(
                       title: 'Izin',
                       value: _stats?.totalIzin.toString() ?? '0',
-                      color: Colors.blue,
+                      color: Color(0xff113289),
                     ),
                   ],
                 ),
               ),
-              Divider(),
+              Divider(indent: 27, endIndent: 27),
               SizedBox(height: 10),
               _history.isEmpty
                   ? Padding(
@@ -126,20 +126,16 @@ class _RiwayatPageState extends State<RiwayatPage> {
 class _StatCard extends StatelessWidget {
   final String title;
   final String value;
-  final Color color;
+  final Color? color;
 
-  const _StatCard({
-    required this.title,
-    required this.value,
-    required this.color,
-  });
+  const _StatCard({required this.title, required this.value, this.color});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color?.withOpacity(0.25),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -149,7 +145,7 @@ class _StatCard extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              color: color,
+              color: Colors.black,
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
@@ -158,7 +154,7 @@ class _StatCard extends StatelessWidget {
           Text(
             value,
             style: TextStyle(
-              color: color,
+              color: Colors.black,
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),

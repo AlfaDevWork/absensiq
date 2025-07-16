@@ -103,7 +103,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       appBar: AppBar(
         title: Text('Ubah Profil'),
         centerTitle: true,
-        surfaceTintColor: Colors.white,
+        backgroundColor: Colors.transparent,
       ),
       body: Form(
         key: _formKey,

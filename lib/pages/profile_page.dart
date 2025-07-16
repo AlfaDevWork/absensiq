@@ -111,6 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
+                            backgroundColor: Colors.white,
                             title: Text(
                               'Keluar',
                               style: TextStyle(fontWeight: FontWeight.bold),
@@ -119,7 +120,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.pop(context),
-                                child: Text('Batal'),
+                                child: Text(
+                                  'Batal',
+                                  style: TextStyle(color: Colors.black),
+                                ),
                               ),
                               TextButton(
                                 onPressed: () async {

@@ -5,10 +5,10 @@ class StyledActionButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const StyledActionButton({
-    Key? key,
+    super.key,
     required this.title,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +21,9 @@ class StyledActionButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xff113289),
             disabledBackgroundColor: Colors.grey,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.elliptical(4, 4)),
+            ),
           ),
           child: Text(title, style: const TextStyle(color: Colors.white)),
         ),

@@ -218,7 +218,7 @@ class _AbsenPageState extends State<AbsenPage> {
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        surfaceTintColor: Colors.white,
+        backgroundColor: Colors.transparent,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -413,6 +413,9 @@ class _AbsenPageState extends State<AbsenPage> {
             backgroundColor: Color(0xff113289),
             // Disable button when submitting or when the action is not allowed
             disabledBackgroundColor: Colors.grey,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.elliptical(4, 4)),
+            ),
           ),
           child: _isSubmitting
               ? const CircularProgressIndicator(

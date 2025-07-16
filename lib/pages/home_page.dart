@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 26),
                       child: Container(
-                        height: 155,
+                        height: 170,
                         decoration: BoxDecoration(
                           color: AppColor.main,
                           borderRadius: BorderRadius.circular(10),
@@ -371,7 +371,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(height: 3),
                 Text(
-                  DateFormat('dd MMMM yyyy', 'id_ID').format(DateTime.now()),
+                  DateFormat(
+                    'EEEE, dd MMMM yyyy',
+                    'id_ID',
+                  ).format(DateTime.now()),
                 ),
                 SizedBox(height: 3),
                 Text(
