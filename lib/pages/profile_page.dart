@@ -1,8 +1,8 @@
 import 'package:absensiq/models/user.dart';
-import 'package:absensiq/pages/auths/change_password_request_screen.dart';
 import 'package:absensiq/pages/auths/login_page.dart';
 import 'package:absensiq/pages/edit_profile.dart';
 import 'package:absensiq/services/auth_service.dart';
+import 'package:absensiq/widgets/watermark.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -88,21 +88,21 @@ class _ProfilePageState extends State<ProfilePage> {
                       },
                     ),
                     Divider(),
-                    ListTile(
-                      leading: Icon(Icons.lock),
-                      title: Text('Ubah Kata Sandi'),
-                      trailing: Icon(Icons.arrow_forward_ios, size: 15),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) =>
-                                ChangePasswordRequestPage(email: _user!.email),
-                          ),
-                        );
-                      },
-                    ),
-                    Divider(),
+                    // ListTile(
+                    //   leading: Icon(Icons.lock),
+                    //   title: Text('Ubah Kata Sandi'),
+                    //   trailing: Icon(Icons.arrow_forward_ios, size: 15),
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (_) =>
+                    //             ChangePasswordRequestPage(email: _user!.email),
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
+                    // Divider(),
                     ListTile(
                       leading: Icon(Icons.exit_to_app),
                       title: Text('Keluar'),
@@ -145,6 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       },
                     ),
                     Divider(),
+                    CopyrightWatermark(),
                   ],
                 ),
               ),

@@ -1,8 +1,8 @@
-import 'package:absensiq/pages/auths/forgot_password.dart';
 import 'package:absensiq/pages/auths/register_page.dart';
 import 'package:absensiq/pages/navigation.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:absensiq/widgets/textformfield.dart';
+import 'package:absensiq/widgets/watermark.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -42,7 +42,11 @@ class _LoginPageState extends State<LoginPage> {
       if (mounted) {
         final message = response['message'] ?? 'Login Berhasil';
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(behavior: SnackBarBehavior.floating, content: Text(message)),
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.green,
+            content: Text(message),
+          ),
         );
         Navigator.of(context).pushNamedAndRemoveUntil(
           NavigationPage.id,
@@ -55,6 +59,7 @@ class _LoginPageState extends State<LoginPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.red,
             content: Text(e.toString()),
           ),
         );
@@ -185,22 +190,22 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                     ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('Lupa Kata Sandi?'),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, ForgotPasswordPage.id);
-                          },
-                          child: const Text(
-                            'Atur Ulang Kata Sandi',
-                            style: TextStyle(color: Color(0xff113289)),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // const SizedBox(height: 20),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     const Text('Lupa Kata Sandi?'),
+                    //     TextButton(
+                    //       onPressed: () {
+                    //         Navigator.pushNamed(context, ForgotPasswordPage.id);
+                    //       },
+                    //       child: const Text(
+                    //         'Atur Ulang Kata Sandi',
+                    //         style: TextStyle(color: Color(0xff113289)),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
@@ -220,6 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
+              CopyrightWatermark(),
             ],
           ),
         ),

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:absensiq/pages/auths/login_page.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:absensiq/widgets/textformfield.dart';
+import 'package:absensiq/widgets/watermark.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pinput/pinput.dart';
@@ -85,9 +86,13 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       );
       if (mounted) {
         final message = response['message'] ?? 'Password berhasil diubah!';
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(message)));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.green,
+            content: Text(message),
+          ),
+        );
 
         if (widget.popOnSucces) {
           int count = 0;
@@ -101,7 +106,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.toString()), backgroundColor: Colors.red),
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
+            content: Text(e.toString()),
+            backgroundColor: Colors.red,
+          ),
         );
       }
     } finally {
@@ -181,6 +190,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   children: [
                     _buildOtpInput(),
                     SizedBox(height: 20),
+                    CopyrightWatermark(),
                     CustomTextFormField(
                       label: 'Password Baru',
                       hintText: 'Masukkan password baru',
@@ -271,32 +281,39 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   }
 
   Widget _buildHeader(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          'Atur Ulang Kata Sandi',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+    return Container(
+      width: 300,
+      decoration: BoxDecoration(
+        color: Colors.white70,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        children: [
+          Text(
+            'Atur Ulang Kata Sandi',
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
 
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 12),
-        RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-            style: TextStyle(color: Colors.grey, height: 1.5),
-            children: <TextSpan>[
-              const TextSpan(text: 'Masukkan kode OTP yang dikirim ke\n'),
-              TextSpan(
-                text: widget.email,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xff113289),
-                ),
-              ),
-            ],
+            textAlign: TextAlign.center,
           ),
-        ),
-      ],
+          const SizedBox(height: 12),
+          RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              style: TextStyle(color: Colors.black, height: 1.5),
+              children: <TextSpan>[
+                const TextSpan(text: 'Masukkan kode OTP yang dikirim ke\n'),
+                TextSpan(
+                  text: widget.email,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff113289),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 

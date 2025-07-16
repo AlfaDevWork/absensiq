@@ -32,6 +32,7 @@ class _NavigationPageState extends State<NavigationPage> {
           border: Border(top: BorderSide(color: Colors.black, width: 1)),
         ),
         child: BottomNavigationBar(
+          fixedColor: Colors.black,
           backgroundColor: Colors.white,
           currentIndex: _currentIndex,
           onTap: (value) {
@@ -45,7 +46,10 @@ class _NavigationPageState extends State<NavigationPage> {
               icon: Icon(Icons.home, color: Colors.black),
               label: 'Beranda',
             ),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person, color: Colors.black),
+              label: 'Profil',
+            ),
           ],
         ),
       ),

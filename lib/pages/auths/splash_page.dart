@@ -1,6 +1,7 @@
 import 'package:absensiq/pages/auths/login_page.dart';
 import 'package:absensiq/pages/navigation.dart';
 import 'package:absensiq/services/auth_service.dart';
+import 'package:absensiq/widgets/watermark.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -34,6 +35,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -42,6 +44,7 @@ class _SplashPageState extends State<SplashPage> {
             Image.asset('assets/images/logo.png'),
             Spacer(),
             Text('V 1.0'),
+            CopyrightWatermark(),
           ],
         ),
       ),

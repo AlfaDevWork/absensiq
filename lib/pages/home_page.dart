@@ -8,6 +8,7 @@ import 'package:absensiq/services/attendance_service.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:absensiq/widgets/attendance_history_card.dart';
 import 'package:absensiq/widgets/izin_history_card.dart';
+import 'package:absensiq/widgets/watermark.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -327,6 +328,7 @@ class _HomePageState extends State<HomePage> {
                               }
                             },
                           ),
+                    CopyrightWatermark(),
                   ],
                 ),
               ),

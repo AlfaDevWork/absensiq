@@ -1,6 +1,7 @@
 import 'package:absensiq/models/attendance_record.dart';
 import 'package:absensiq/services/attendance_service.dart';
 import 'package:absensiq/widgets/custom_button.dart';
+import 'package:absensiq/widgets/watermark.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -195,6 +196,7 @@ class _IzinPageState extends State<IzinPage> {
                               onPressed: _handleSubmitIzin,
                             ),
                       SizedBox(height: 32),
+                      CopyrightWatermark(),
                     ],
                   ),
                 ),

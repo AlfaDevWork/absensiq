@@ -4,6 +4,7 @@ import 'package:absensiq/constant/app_color.dart';
 import 'package:absensiq/pages/izin_page.dart';
 import 'package:absensiq/services/attendance_service.dart';
 import 'package:absensiq/widgets/custom_action_button.dart';
+import 'package:absensiq/widgets/watermark.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -228,163 +229,170 @@ class _AbsenPageState extends State<AbsenPage> {
         centerTitle: true,
         title: Text('Kehadiran'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 350,
-            width: double.infinity,
-            child: Stack(
-              children: [
-                GoogleMap(
-                  initialCameraPosition: CameraPosition(
-                    target: _officeLocation,
-                    zoom: 14,
+      body: ConstrainedBox(
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 350,
+              width: double.infinity,
+              child: Stack(
+                children: [
+                  GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                      target: _officeLocation,
+                      zoom: 14,
+                    ),
+                    onMapCreated: (GoogleMapController controller) {
+                      if (!_mapController.isCompleted) {
+                        _mapController.complete(controller);
+                      }
+                    },
+                    markers: _markers,
+                    myLocationEnabled: true,
+                    myLocationButtonEnabled: false,
+                    zoomControlsEnabled: false,
                   ),
-                  onMapCreated: (GoogleMapController controller) {
-                    if (!_mapController.isCompleted) {
-                      _mapController.complete(controller);
-                    }
-                  },
-                  markers: _markers,
-                  myLocationEnabled: true,
-                  myLocationButtonEnabled: false,
-                  zoomControlsEnabled: false,
-                ),
-                if (_isLoadingLocation)
-                  Container(
-                    color: Colors.white.withOpacity(0.8),
-                    child: const Center(child: CircularProgressIndicator()),
-                  ),
-                if (_errorMessage != null)
-                  Container(
-                    color: Colors.white.withOpacity(0.8),
-                    padding: EdgeInsets.all(16),
-                    child: Center(
-                      child: Text(
-                        _errorMessage!,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.red),
+                  if (_isLoadingLocation)
+                    Container(
+                      color: Colors.white.withOpacity(0.8),
+                      child: const Center(child: CircularProgressIndicator()),
+                    ),
+                  if (_errorMessage != null)
+                    Container(
+                      color: Colors.white.withOpacity(0.8),
+                      padding: EdgeInsets.all(16),
+                      child: Center(
+                        child: Text(
+                          _errorMessage!,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.red),
+                        ),
                       ),
                     ),
-                  ),
-                Positioned(
-                  bottom: 16,
-                  right: 16,
-                  child: FloatingActionButton(
-                    onPressed: _getCurrentLocation,
-                    backgroundColor: Colors.white,
-                    foregroundColor: Color(0xff113289),
-                    mini: true,
-                    elevation: 4.0,
-                    child: const Icon(Icons.my_location),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 30),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 33),
-                child: Text('Status: '),
-              ),
-              SizedBox(width: 12),
-              Text(
-                capitalize(_status),
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          SizedBox(height: 20),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 33),
-                child: Text('Alamat:'),
-              ),
-              SizedBox(width: 12),
-              Flexible(child: Text(_currentAddress)),
-            ],
-          ),
-          SizedBox(height: 36),
-          // Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(left: 33, right: 33, bottom: 15),
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppColor.border),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          DateFormat(
-                            'EEEE',
-                            'id_ID',
-                          ).format(_attendanceDate ?? DateTime.now()),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          DateFormat(
-                            'dd MMM yy',
-                            'id_ID',
-                          ).format(_attendanceDate ?? DateTime.now()),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          children: [
-                            Text('Masuk'),
-                            SizedBox(height: 4),
-                            Text(_checkInTime),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Text('Pulang'),
-                            SizedBox(height: 4),
-                            Text(_checkOutTime),
-                          ],
-                        ),
-                      ],
+                  Positioned(
+                    bottom: 16,
+                    right: 16,
+                    child: FloatingActionButton(
+                      onPressed: _getCurrentLocation,
+                      backgroundColor: Colors.white,
+                      foregroundColor: Color(0xff113289),
+                      mini: true,
+                      elevation: 4.0,
+                      child: const Icon(Icons.my_location),
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-          Spacer(),
-          Divider(),
-          SizedBox(height: 10),
-          StyledActionButton(
-            title: 'Pengajuan Izin',
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => IzinPage()),
-              );
-            },
-          ),
-          SizedBox(height: 10),
-          _buildActionButton(),
-          SizedBox(height: 15),
-        ],
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 33),
+                  child: Text('Status: '),
+                ),
+                SizedBox(width: 12),
+                Text(
+                  capitalize(_status),
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 33),
+                  child: Text('Alamat:'),
+                ),
+                SizedBox(width: 12),
+                Flexible(child: Text(_currentAddress)),
+              ],
+            ),
+            SizedBox(height: 20),
+            // Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(left: 33, right: 33, bottom: 15),
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: AppColor.border),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            DateFormat(
+                              'EEEE',
+                              'id_ID',
+                            ).format(_attendanceDate ?? DateTime.now()),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            DateFormat(
+                              'dd MMM yy',
+                              'id_ID',
+                            ).format(_attendanceDate ?? DateTime.now()),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            children: [
+                              Text('Masuk'),
+                              SizedBox(height: 4),
+                              Text(_checkInTime),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text('Pulang'),
+                              SizedBox(height: 4),
+                              Text(_checkOutTime),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Spacer(),
+            Divider(),
+            SizedBox(height: 10),
+            // StyledActionButton(
+            //   title: 'Pengajuan Izin',
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (_) => IzinPage()),
+            //     );
+            //   },
+            // ),
+            SizedBox(height: 10),
+            _buildActionButton(),
+            SizedBox(height: 15),
+            CopyrightWatermark(),
+          ],
+        ),
       ),
     );
   }

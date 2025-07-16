@@ -1,6 +1,7 @@
 import 'package:absensiq/pages/auths/reset_password.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:absensiq/widgets/textformfield.dart';
+import 'package:absensiq/widgets/watermark.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -29,7 +30,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       if (mounted) {
         final message = response['message'] ?? 'OTP berhasil dikirim!';
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(message), backgroundColor: Colors.green),
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
+            content: Text(message),
+            backgroundColor: Colors.green,
+          ),
         );
         Navigator.push(
           context,
@@ -44,7 +49,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.toString()), backgroundColor: Colors.red),
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
+            content: Text(e.toString()),
+            backgroundColor: Colors.red,
+          ),
         );
       }
     } finally {
@@ -73,7 +82,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           },
           icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
         ),
-
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -101,6 +109,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   children: [
                     Text(
                       'Atur Ulang Kata Sandi',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
@@ -164,6 +173,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               ),
                             ),
                           ),
+                    CopyrightWatermark(),
                   ],
                 ),
               ),

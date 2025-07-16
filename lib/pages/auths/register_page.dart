@@ -4,6 +4,7 @@ import 'package:absensiq/pages/auths/login_page.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:absensiq/widgets/custom_search_dropdown.dart';
 import 'package:absensiq/widgets/textformfield.dart'; // Pastikan path ini benar
+import 'package:absensiq/widgets/watermark.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -27,13 +28,11 @@ class _RegisterPageState extends State<RegisterPage> {
   Training? _selectedTraining;
 
   String? _selectedGender;
-  // File? _profileImage;
 
   bool _viewPassword = false;
   bool _isLoading = false;
   bool _isDataLoading = false;
   final AuthService _authService = AuthService();
-  // final ImagePicker _picker = ImagePicker();
 
   @override
   void initState() {
@@ -54,7 +53,10 @@ class _RegisterPageState extends State<RegisterPage> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Gagal memuat data: ${e.toString()}')),
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text('Gagal memuat data: ${e.toString()}'),
+          ),
         );
       }
     } finally {
@@ -87,7 +89,11 @@ class _RegisterPageState extends State<RegisterPage> {
       if (mounted) {
         final message = response['message'] ?? 'Registrasi berhasil!';
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(behavior: SnackBarBehavior.floating, content: Text(message)),
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.green,
+            content: Text(message),
+          ),
         );
         Navigator.of(context).pop();
       }
@@ -122,7 +128,6 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        surfaceTintColor: Colors.white,
         automaticallyImplyLeading: false,
         title: Center(
           child: const Text('Buat Akun', style: TextStyle(color: Colors.white)),
@@ -302,6 +307,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ],
                           ),
+                          CopyrightWatermark(),
                         ],
                       ),
                     ),

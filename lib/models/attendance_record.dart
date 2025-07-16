@@ -17,16 +17,16 @@ class AttendanceRecord {
     this.alasanIzin,
   });
 
-  bool get isLate {
-    if (status != 'masuk' || checkInTime == '-') return false;
-    try {
-      final timeParts = checkInTime.split(':');
-      final hour = int.parse(timeParts[0]);
-      return hour >= 8;
-    } catch (e) {
-      return false;
-    }
-  }
+  // bool get isLate {
+  //   if (status != 'masuk' || checkInTime == '-') return false;
+  //   try {
+  //     final timeParts = checkInTime.split(':');
+  //     final hour = int.parse(timeParts[0]);
+  //     return hour >= 8;
+  //   } catch (e) {
+  //     return false;
+  //   }
+  // }
 
   factory AttendanceRecord.fromJson(Map<String, dynamic> json) {
     // Helper untuk mem-parsing tanggal dari API.

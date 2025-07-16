@@ -3,6 +3,7 @@ import 'package:absensiq/models/attendance_stats.dart';
 import 'package:absensiq/services/attendance_service.dart';
 import 'package:absensiq/widgets/attendance_history_card.dart';
 import 'package:absensiq/widgets/izin_history_card.dart';
+import 'package:absensiq/widgets/watermark.dart';
 import 'package:flutter/material.dart';
 
 class RiwayatPage extends StatefulWidget {
@@ -75,22 +76,27 @@ class _RiwayatPageState extends State<RiwayatPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: GridView.count(
-                  crossAxisCount: 2,
+                  crossAxisCount: 3,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
-                  childAspectRatio: 2,
+                  childAspectRatio: 1.2,
                   children: [
                     _StatCard(
                       title: 'Hadir',
                       value: _stats?.totalMasuk.toString() ?? '0',
-                      color: Color(0xff113289),
+                      color: Color(0x3084BFFF),
                     ),
                     _StatCard(
                       title: 'Izin',
                       value: _stats?.totalIzin.toString() ?? '0',
-                      color: Color(0xff113289),
+                      color: Color(0x3084BFFF),
+                    ),
+                    _StatCard(
+                      title: 'Absen',
+                      value: _stats?.totalAbsen.toString() ?? '0',
+                      color: Color(0x3084BFFF),
                     ),
                   ],
                 ),
@@ -115,6 +121,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
                         }
                       },
                     ),
+              CopyrightWatermark(),
             ],
           ),
         ),
@@ -135,7 +142,7 @@ class _StatCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color?.withOpacity(0.25),
+        color: color,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
