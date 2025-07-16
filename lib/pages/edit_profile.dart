@@ -134,6 +134,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           text: 'Simpan Perubahan',
                           onPressed: _handleUpdateProfile,
                         ),
+
                   CopyrightWatermark(),
                 ],
               ),
@@ -171,18 +172,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
           ),
           const SizedBox(height: 8),
-          TextButton.icon(
-            onPressed: _pickImage,
-            icon: const Icon(
-              Icons.camera_alt_outlined,
-              size: 20,
-              color: Color(0xff113289),
-            ),
-            label: const Text(
-              'Ubah Foto Profil',
-              style: TextStyle(color: Color(0xff113289)),
-            ),
-          ),
+          // TextButton.icon(
+          //   onPressed: _pickImage,
+          //   icon: const Icon(
+          //     Icons.camera_alt_outlined,
+          //     size: 20,
+          //     color: Color(0xff113289),
+          //   ),
+          //   label: const Text(
+          //     'Ubah Foto Profil',
+          //     style: TextStyle(color: Color(0xff113289)),
+          //   ),
+          // ),
         ],
       ),
     );
