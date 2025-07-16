@@ -378,15 +378,15 @@ class _AbsenPageState extends State<AbsenPage> {
             Spacer(),
             Divider(),
             SizedBox(height: 10),
-            // StyledActionButton(
-            //   title: 'Pengajuan Izin',
-            //   onPressed: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(builder: (_) => IzinPage()),
-            //     );
-            //   },
-            // ),
+            StyledActionButton(
+              title: 'Pengajuan Izin',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => IzinPage()),
+                );
+              },
+            ),
             SizedBox(height: 10),
             _buildActionButton(),
             SizedBox(height: 15),

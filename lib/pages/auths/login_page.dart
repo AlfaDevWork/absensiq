@@ -1,3 +1,4 @@
+import 'package:absensiq/pages/auths/forgot_password.dart';
 import 'package:absensiq/pages/auths/register_page.dart';
 import 'package:absensiq/pages/navigation.dart';
 import 'package:absensiq/services/auth_service.dart';
@@ -190,22 +191,22 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                     ),
-                    // const SizedBox(height: 20),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     const Text('Lupa Kata Sandi?'),
-                    //     TextButton(
-                    //       onPressed: () {
-                    //         Navigator.pushNamed(context, ForgotPasswordPage.id);
-                    //       },
-                    //       child: const Text(
-                    //         'Atur Ulang Kata Sandi',
-                    //         style: TextStyle(color: Color(0xff113289)),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Lupa Kata Sandi?'),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, ForgotPasswordPage.id);
+                          },
+                          child: const Text(
+                            'Atur Ulang Kata Sandi',
+                            style: TextStyle(color: Color(0xff113289)),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
