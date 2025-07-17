@@ -50,9 +50,10 @@ class _AbsenPageState extends State<AbsenPage> {
         setState(() {
           final data = result['data'];
           _status = data['status'] ?? 'Belum Check In';
-          _attendanceDate = data['attendance_date'] != null
-              ? DateTime.parse(data['attendance_date'])
-              : DateTime.now();
+          _attendanceDate =
+              data['attendance_date'] != null
+                  ? DateTime.parse(data['attendance_date'])
+                  : DateTime.now();
           _checkInTime = data['check_in_time'] ?? '-';
           _checkOutTime = data['check_out_time'] ?? '-';
           _hasCheckedIn = data['check_in_time'] != null;
@@ -383,7 +384,7 @@ class _AbsenPageState extends State<AbsenPage> {
           ),
           SizedBox(height: 10),
           _buildActionButton(),
-          SizedBox(height: 15),
+          Spacer(),
         ],
       ),
     );
@@ -417,11 +418,12 @@ class _AbsenPageState extends State<AbsenPage> {
               borderRadius: BorderRadius.all(Radius.elliptical(4, 4)),
             ),
           ),
-          child: _isSubmitting
-              ? const CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                )
-              : Text(buttonText, style: TextStyle(color: Colors.white)),
+          child:
+              _isSubmitting
+                  ? const CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  )
+                  : Text(buttonText, style: TextStyle(color: Colors.white)),
         ),
       ),
     );
