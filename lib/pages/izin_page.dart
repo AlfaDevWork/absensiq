@@ -196,7 +196,6 @@ class _IzinPageState extends State<IzinPage> {
                               onPressed: _handleSubmitIzin,
                             ),
                       SizedBox(height: 32),
-                      CopyrightWatermark(),
                     ],
                   ),
                 ),

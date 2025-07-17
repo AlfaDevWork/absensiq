@@ -1,7 +1,6 @@
 import 'package:absensiq/pages/auths/reset_password.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:absensiq/widgets/custom_button.dart';
-import 'package:absensiq/widgets/watermark.dart';
 import 'package:flutter/material.dart';
 
 class ChangePasswordRequestPage extends StatefulWidget {
@@ -106,7 +105,6 @@ class _ChangePasswordRequestPageState extends State<ChangePasswordRequestPage> {
                     onPressed: _handleSendOtp,
                   ),
             const SizedBox(height: 20),
-            CopyrightWatermark(),
           ],
         ),
       ),

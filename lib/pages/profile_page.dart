@@ -146,7 +146,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       },
                     ),
                     Divider(),
-                    CopyrightWatermark(),
                   ],
                 ),
               ),

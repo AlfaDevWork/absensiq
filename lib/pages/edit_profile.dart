@@ -135,7 +135,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           onPressed: _handleUpdateProfile,
                         ),
 
-                  CopyrightWatermark(),
                 ],
               ),
             ),

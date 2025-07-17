@@ -390,7 +390,6 @@ class _AbsenPageState extends State<AbsenPage> {
             SizedBox(height: 10),
             _buildActionButton(),
             SizedBox(height: 15),
-            CopyrightWatermark(),
           ],
         ),
       ),
