@@ -3,8 +3,7 @@ import 'package:absensiq/models/training.dart';
 import 'package:absensiq/pages/auths/login_page.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:absensiq/widgets/custom_search_dropdown.dart';
-import 'package:absensiq/widgets/textformfield.dart'; // Pastikan path ini benar
-import 'package:absensiq/widgets/watermark.dart';
+import 'package:absensiq/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {

@@ -1,7 +1,6 @@
 import 'package:absensiq/pages/auths/reset_password.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:absensiq/widgets/textformfield.dart';
-import 'package:absensiq/widgets/watermark.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordPage extends StatefulWidget {

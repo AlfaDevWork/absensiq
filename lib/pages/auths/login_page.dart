@@ -3,7 +3,6 @@ import 'package:absensiq/pages/auths/register_page.dart';
 import 'package:absensiq/pages/navigation.dart';
 import 'package:absensiq/services/auth_service.dart';
 import 'package:absensiq/widgets/textformfield.dart';
-import 'package:absensiq/widgets/watermark.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {

@@ -3,7 +3,6 @@ import 'package:absensiq/models/attendance_stats.dart';
 import 'package:absensiq/services/attendance_service.dart';
 import 'package:absensiq/widgets/attendance_history_card.dart';
 import 'package:absensiq/widgets/izin_history_card.dart';
-import 'package:absensiq/widgets/watermark.dart';
 import 'package:flutter/material.dart';
 
 class RiwayatPage extends StatefulWidget {
