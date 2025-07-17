@@ -104,7 +104,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
               SizedBox(height: 10),
               _history.isEmpty
                   ? Padding(
-                      padding: EdgeInsetsGeometry.symmetric(vertical: 24),
+                      padding: EdgeInsets.symmetric(vertical: 24),
                       child: Center(child: Text('Belum ada riwayat kehadiran')),
                     )
                   : ListView.builder(

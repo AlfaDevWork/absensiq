@@ -127,196 +127,197 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: _isLoading
-          ? Center(child: CircularProgressIndicator())
-          : _errorMessage != null
-          ? Center(child: Text(_errorMessage!))
-          : RefreshIndicator(
-              onRefresh: _loadAllData,
-              child: SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildHeader(),
-                    SizedBox(height: 18),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 26),
-                      child: Container(
-                        height: 170,
-                        decoration: BoxDecoration(
-                          color: AppColor.main,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 15,
-                                    top: 17,
-                                  ),
-                                  child: Icon(
-                                    Icons.location_on_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Flexible(
-                                  child: Padding(
+      body:
+          _isLoading
+              ? Center(child: CircularProgressIndicator())
+              : _errorMessage != null
+              ? Center(child: Text(_errorMessage!))
+              : RefreshIndicator(
+                onRefresh: _loadAllData,
+                child: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildHeader(),
+                      SizedBox(height: 18),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 26),
+                        child: Container(
+                          height: 170,
+                          decoration: BoxDecoration(
+                            color: AppColor.main,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Padding(
                                     padding: const EdgeInsets.only(
-                                      left: 11,
+                                      left: 15,
                                       top: 17,
                                     ),
-                                    child: Text(
-                                      'Jl. Karet Pasar Baru Barat, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      softWrap: true,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 16),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 30,
-                              ),
-                              child: Container(
-                                width: 300,
-                                height: 67,
-                                decoration: BoxDecoration(
-                                  color: Color(0x21113289),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Masuk',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Text(
-                                            _checkInTime,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    VerticalDivider(
-                                      indent: 6,
-                                      endIndent: 6,
+                                    child: Icon(
+                                      Icons.location_on_outlined,
                                       color: Colors.white,
                                     ),
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Pulang',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Text(
-                                            _checkOutTime,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ],
+                                  ),
+                                  Flexible(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 11,
+                                        top: 17,
+                                      ),
+                                      child: Text(
+                                        'Jl. Karet Pasar Baru Barat, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        softWrap: true,
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 14),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 26),
-                      child: Container(
-                        // width: 350,
-                        height: 70,
-                        decoration: BoxDecoration(
-                          color: Color(0x3084BFFF),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('Jarak dari lokasi'),
-                                Text(
-                                  _distance,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                              SizedBox(height: 16),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 30,
+                                ),
+                                child: Container(
+                                  width: 300,
+                                  height: 67,
+                                  decoration: BoxDecoration(
+                                    color: Color(0x21113289),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Masuk',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Text(
+                                              _checkInTime,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      VerticalDivider(
+                                        indent: 6,
+                                        endIndent: 6,
+                                        color: Colors.white,
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Pulang',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Text(
+                                              _checkOutTime,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 12),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: Text(
-                            'Riwayat Kehadiran',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
+                      SizedBox(height: 14),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 26),
+                        child: Container(
+                          // width: 350,
+                          height: 70,
+                          decoration: BoxDecoration(
+                            color: Color(0x3084BFFF),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Jarak dari lokasi'),
+                                  Text(
+                                    _distance,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                        Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, RiwayatPage.id);
-                            },
+                      ),
+                      SizedBox(height: 12),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
                             child: Text(
-                              'Lihat Semua',
-                              style: TextStyle(color: Color(0xff113289)),
+                              'Riwayat Kehadiran',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    _attendanceHistory.isEmpty
-                        ? Padding(
-                            padding: EdgeInsetsGeometry.symmetric(vertical: 24),
+                          Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 20),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, RiwayatPage.id);
+                              },
+                              child: Text(
+                                'Lihat Semua',
+                                style: TextStyle(color: Color(0xff113289)),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      _attendanceHistory.isEmpty
+                          ? Padding(
+                            padding: EdgeInsets.symmetric(vertical: 24),
                             child: Center(
                               child: Text('Belum ada riwayat kehadiran'),
                             ),
                           )
-                        : ListView.builder(
+                          : ListView.builder(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
@@ -330,18 +331,18 @@ class _HomePageState extends State<HomePage> {
                               }
                             },
                           ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
     );
   }
 
   Row _buildHeader() {
     final profileImage =
         _user?.profilePhotoUrl != null && _user!.profilePhotoUrl!.isNotEmpty
-        ? NetworkImage(_user!.profilePhotoUrl!)
-        : AssetImage('assets/images/noprofilepicture.jpg') as ImageProvider;
+            ? NetworkImage(_user!.profilePhotoUrl!)
+            : AssetImage('assets/images/noprofilepicture.jpg') as ImageProvider;
     return Row(
       children: [
         Padding(
